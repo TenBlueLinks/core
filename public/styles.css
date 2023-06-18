@@ -1,0 +1,56 @@
+
+ html, body, div, p, h1, h2 {font-family: Verdana, "Lucida Sans", sans-serif; color: #000;}
+ html, body, div, p  {font-weight: normal;}
+
+ h1, h2, h3 {font-weight: bold; color: rgb(173, 41, 151);}
+ sup {font-weight: normal;}
+
+ html, body, div, p  {font-size: 12px;}
+ h1 {font-size: 20px; margin-top: 30px;}
+ h2 {font-size: 16px; clear: left;}
+ h3 {font-size: 14px; clear: left;}
+ p {font-size: 12px; clear: left;}
+ body {font-size: 13px;}
+ /* Light mode */
+ @media (prefers-color-scheme: light) {
+     body {
+         background-color: white;
+         color: black;
+     }
+     a[href="#"]:link {font-size: 20px; color: rgb(122, 122, 255);}
+     a[href="#"]:visited {font-size: 20px; color: rgb(201, 112, 201);}
+
+     h3 a:visited {color: #087 !important;}
+     h3 a:link {font-size: 20px; color: #087 !important;}
+
+
+     p a:visited {font-size: 20px; color: rgb(118, 0, 187) !important;}
+     p a:link {font-size: 20px; color: rgb(16, 0, 163) !important;}
+ }
+
+ /* Dark mode */
+ @media (prefers-color-scheme: dark) {
+     html, body, div, p  {font-weight: normal; color: seashell;}
+     h1, h2, h3 {font-weight: bold; color: rgb(223, 124, 206);}
+     body {
+         background-color: rgb(0, 0, 0);
+         color: white;
+     }
+     a[href="#"]:link {color: rgb(255, 255, 255);}
+     a[href="#"]:visited {color: rgb(255, 0, 21);}
+
+     a:link {color: rgb(177, 199, 215);}
+     a:visited {color: rgb(251, 191, 252);}
+
+
+
+
+     h3 a:visited {color: rgb(0, 136, 29) !important;}
+     h3 a:link {color: rgb(136, 0, 118) !important;}
+
+     p a:visited {color: rgb(205, 103, 236) !important;}
+     p a:link {font-size: 20px; color: rgb(82, 132, 224) !important;}
+ }
+
+
+

@@ -1,11 +1,6 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    ffi (1.15.5)
-    haml (6.1.1)
-      temple (>= 0.8.2)
-      thor
-      tilt
     multi_json (1.15.0)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
@@ -13,8 +8,6 @@ GEM
     rack-protection (3.0.6)
       rack
     ruby2_keywords (0.0.5)
-    sassc (2.4.0)
-      ffi (~> 1.9)
     sinatra (3.0.6)
       mustermann (~> 3.0)
       rack (~> 2.2, >= 2.2.4)
@@ -26,24 +19,19 @@ GEM
       rack-protection (= 3.0.6)
       sinatra (= 3.0.6)
       tilt (~> 2.0)
-    sinatra-flash (0.3.0)
-      sinatra (>= 1.0.0)
     sinatra-static-assets (1.0.4)
       sinatra (>= 1.1.0)
-    temple (0.10.2)
-    thor (1.2.2)
     tilt (2.2.0)
+    webrick (1.8.1)
 
 PLATFORMS
   x86_64-darwin-22
 
 DEPENDENCIES
-  haml
-  sassc
   sinatra
   sinatra-contrib
-  sinatra-flash
   sinatra-static-assets
+  webrick
 
 BUNDLED WITH
    2.4.10

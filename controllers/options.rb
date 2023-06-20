@@ -1,11 +1,4 @@
 get "/options" do
-  if params[:safesearch]
-    cookies[:safesearch] = params[:safesearch]
-  end
-  if params[:where]
-    cookies[:where] = params[:where]
-  end
-  @where = cookies[:where] ? cookies[:where] : "en-US"
   erb :options, :locals => { :options => langarray() }
 end
 

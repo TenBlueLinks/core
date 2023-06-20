@@ -1,8 +1,8 @@
 require "sinatra"
 require "sinatra/cookies"
-require "sassc"
-require "haml"
-require "sinatra/reloader"
+# require "sinatra/reloader"
 require "sinatra/static_assets"
 require_relative "controllers"
 require_relative "helpers"
+
+set :server, "webrick"

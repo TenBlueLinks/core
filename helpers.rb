@@ -4,6 +4,5 @@ def require_helpers(helper_list)
   end
 end
 
-# Example usage
 helper_list = %w[langarray result_struct search_tools]
 require_helpers(helper_list)

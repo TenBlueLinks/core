@@ -3,9 +3,16 @@ get "/" do
 end
 
 get "/results" do
-  sample = Result.new("http://www.google.com", "Google", "Search the web easily with Google")
-  sample2 = Result.new("http://www.bing.com", "Bing", "Search the web easily with Bing")
-  @results = [sample, sample2]
-  @query = params[:query].to_s
+  @query = URI.decode_www_form_component(params[:query])
+  @results = search_engine(params[:engine], @query)
   erb :results
+end
+
+def search_engine(engine, query)
+  case engine
+  when "bing"
+    SearchTools::Bing.search(QueryBuilder.new(query, "en-US", true, 0, 10))
+  when "brave"
+    SearchTools::Brave.search(QueryBuilder.new(query, "en-US", true, 0, 10))
+  end
 end

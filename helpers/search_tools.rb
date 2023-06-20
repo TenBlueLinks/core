@@ -2,14 +2,16 @@ require "httparty"
 require "uri"
 require "cgi"
 require "json"
+require_relative "brave_search"
 
 module SearchTools
   module Bing
     def self.search(query)
+      results_parse(JSON.parse(HTTParty.get(url(query), headers: headers()).body))
     end
 
     def self.url(querybuilder)
-      "https://api.bing.microsoft.com/v7.0/search?q=#{CGI.escape(querybuilder.query)}&mkt=#{querybuilder.market}&safeSearch=#{querybuilder.safesearch}&offset=#{querybuilder.offset}&count=#{querybuilder.count}"
+      "https://api.bing.microsoft.com/v7.0/search?q=#{CGI.escape(querybuilder.query)}&mkt=#{querybuilder.market}&safeSearch=#{if querybuilder.safesearch then "strict" else "moderate" end}&offset=#{querybuilder.offset}&count=#{querybuilder.count}"
     end
 
     def self.results_parse(response)
@@ -20,12 +22,6 @@ module SearchTools
 
     def self.headers
       { "Ocp-Apim-Subscription-Key": ENV["BING_API_KEY"] }
-    end
-  end
-
-  module Brave
-    def self.headers
-      { "X-Subscription-Token": ENV["BRAVE_TOKEN"] }
     end
   end
 end

@@ -3,10 +3,8 @@
 source "https://rubygems.org"
 
 gem "sinatra"
-gem "sassc"
+gem "webrick"
 gem "sinatra-contrib"
-gem "haml"
-gem "sinatra-flash"
 
 # source "http://gemcutter.org"
 

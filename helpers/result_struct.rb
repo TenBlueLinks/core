@@ -1,5 +1,5 @@
 module ResultTools
-  def to_html(result)
+  def self.to_html(result)
     "<a href=\"#{result.url}\">#{result.title}</a>
     <br/> <br/>
     #{result.url}

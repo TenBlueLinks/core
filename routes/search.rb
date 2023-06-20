@@ -6,5 +6,6 @@ get "/results" do
   sample = Result.new("http://www.google.com", "Google", "Search the web easily with Google")
   sample2 = Result.new("http://www.bing.com", "Bing", "Search the web easily with Bing")
   @results = [sample, sample2]
+  @query = params[:query].to_s
   erb :results
 end

@@ -1,10 +1,11 @@
+<title> <%= @query %> </title>
 <%= "<br/> " * 2 %>
 <h3>Search the Web</h3>
 <form action="/results" method="get">
-  <input type="text" name="query" size="40" placeholder="Search for anything">
+  <input type="text" name="query" size="40" placeholder=<%= @query %>>
   <input type="submit" value="Search">
 </form>
 <%= "<br/> " * 2 %>
 <% for result in @results do %>
-    <%= result.to_html %>
+    <%= ResultTools.to_html(result) %>
 <% end %>

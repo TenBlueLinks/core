@@ -9,3 +9,4 @@ gem "sinatra-contrib"
 # source "http://gemcutter.org"
 
 gem "sinatra-static-assets"
+gem "httparty"

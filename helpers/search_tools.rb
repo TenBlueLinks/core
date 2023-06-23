@@ -27,8 +27,6 @@ end
 
 module SearchEngines
   def search_engine(name)
-    engine_class = Object.const_get("#{name}SearchEngine")
-    engine = engine_class.new
-    { name.downcase => engine }
+    { name.downcase => Object.const_get("#{name}SearchEngine").new }
   end
 end

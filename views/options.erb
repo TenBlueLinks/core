@@ -1,25 +1,22 @@
 <link rel="stylesheet" href="styles.css">
-<div align="center">
-<h1>Your Options</h1>
-<form>(action="/options/save" method="get")
-  <p>
-    <% selected_where = cookies[:where] || "en-US"  # Default value for 'where' select element %>
-    <select>(name="where")
-      <% options.each do |option| %>
-        <option>(value="#{option[1]}", selected=(selected_where == option[1]))= option[0]</option>
-      <% end %>
+<div style="text-align: center;">
+  <h1>Your Options</h1>
+  <form action="/options/save" method="get">
+    <p>
+      <% selected_where = cookies[:where] || "en-US" %>
+      <select name="where">
+        <% options.each do |option| %>
+          <option value="<%= option[1] %>" <%= 'selected' if selected_where == option[1] %>><%= option[0] %></option>
+        <% end %>
+      </select>
+    </p>
+    <% selected_safe_search = cookies[:safesearch] || "false" %>
+    <select name="safesearch">
+      <option value="true" <%= 'selected' if selected_safe_search == 'true' %>>strict</option>
+      <option value="false" <%= 'selected' if selected_safe_search == 'false' %>>moderate</option>
     </select>
-  </p>
-  <br/>
-  <br/>
-  <% selected_safe_search = cookies[:safesearch] || "false"  # Default value for 'safesearch' select element %>
-  <select>(name="safesearch")
-    <option>(value="true", selected=(selected_safe_search == 'true')) strict</option>
-    <option>(value="false", selected=(selected_safe_search == 'false')) moderate</option>
-  </select>
-  <label>(for="safesearch") SafeSearch</label>
-  <br/>
-  <br/>
-  <input>(type="submit" value="Save")</input>
-</form>
+    <label for="safesearch">SafeSearch</label>
+    <%= "<br/> " * 2 %>
+    <input type="submit" value="Save">
+  </form>
 </div>

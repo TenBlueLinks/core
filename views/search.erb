@@ -9,6 +9,11 @@
   <br>
   <form action="/results" method="get">
     <input type="text" name="query" size="50" placeholder="Search for anything">
+    <select name="engine">
+      <% Engines.each do |name, _engine| %>
+        <option value="<%= name %>"><%= name %></option>
+      <% end %>
+    </select>
     <%= "<br/> " * 4 %>
     <input type="submit" value="Search">
   </form>

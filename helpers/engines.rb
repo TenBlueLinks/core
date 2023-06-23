@@ -6,7 +6,7 @@ def require_search_engines(engine_name_list)
   end
 end
 
-engines = %w[Bing Brave GitHub]
+engines = %w[Bing Brave] #GitHub
 require_search_engines(engines)
 
 include SearchEngines

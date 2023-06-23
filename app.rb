@@ -4,5 +4,3 @@ require "sinatra/cookies"
 require "sinatra/static_assets"
 require_relative "controllers"
 require_relative "helpers"
-
-set :server, "webrick"

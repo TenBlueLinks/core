@@ -1,6 +1,6 @@
 get "/options" do
   @title = "Edit Options"
-  erb :options, :locals => { :options => langarray() }
+  erb :options, :locals => { :options => langhash() }
 end
 
 get "/options/view" do

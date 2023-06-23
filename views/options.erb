@@ -4,15 +4,15 @@
     <p>
       <% selected_where = cookies[:where] || "en-US" %>
       <select name="where">
-        <% options.each do |option| %>
-          <option value="<%= option[1] %>" <%= 'selected' if selected_where == option[1] %>><%= option[0] %></option>
+        <% options.each do |friendlyname, identifier| %>
+          <option value="<%= identifier %>" <%= 'selected' if selected_where == identifier %>><%= friendlyname %></option>
         <% end %>
       </select>
     </p>
-    <% selected_safe_search = cookies[:safesearch] || "false" %>
+    <% selected_safe_search = cookies[:safesearch] || "true" %>
     <select name="safesearch">
-      <option value="true" <%= 'selected' if selected_safe_search == 'true' %>>strict</option>
-      <option value="false" <%= 'selected' if selected_safe_search == 'false' %>>moderate</option>
+      <option value="true" <%= 'selected' if selected_safe_search == 'true' %>>Strict</option>
+      <option value="false" <%= 'selected' if selected_safe_search == 'false' %>>Moderate</option>
     </select>
     <label for="safesearch">SafeSearch</label>
     <%= "<br/> " * 2 %>

@@ -1,13 +1,4 @@
 <link rel="stylesheet" href="/styles.css">
 <div align="center">
-<h1> Your Options </h1>
-<p>
-  <%= "Language and location set to: #{cookies[:where]}" %>
-  <br/>
-  <%= "SafeSearch =  #{cookies[:safesearch]}" %>
-</p>
-<a href="/options">Edit</a>
-<%= "<br/> " * 2 %>
-<a href="/">Back to Home</a>
-
+  <%= HTMLizer.options_viewer(cookies[:where], cookies[:safesearch]) %>
 </div>

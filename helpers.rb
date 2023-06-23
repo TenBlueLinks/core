@@ -4,5 +4,5 @@ def require_helpers(helper_list)
   end
 end
 
-helper_list = %w[langarray engines]
+helper_list = %w[langhash engines html]
 require_helpers(helper_list)

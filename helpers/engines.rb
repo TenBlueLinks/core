@@ -11,8 +11,6 @@ require_search_engines(engines)
 
 include SearchEngines
 
-Engines = {}
-
-engines.each do |engine_name|
-  Engines.merge!(search_engine(engine_name))
-end
+Engines = engines
+  .map { |engine_name| search_engine(engine_name) }
+  .reduce({}, :merge)

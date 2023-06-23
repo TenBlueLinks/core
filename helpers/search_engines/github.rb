@@ -8,8 +8,9 @@ class GitHubSearchEngine < SearchEngine
   end
 
   def results_parse(response)
-    response["items"].map do |result|
+    response["items"].map {
+      |result|
       Result.new(result["html_url"], result["full_name"], result["description"])
-    end
+    }
   end
 end

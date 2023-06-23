@@ -6,9 +6,10 @@ class BraveSearchEngine < SearchEngine
   private
 
   def results_parse(response)
-    response["web"]["results"].map do |result|
+    response["web"]["results"].map {
+      |result|
       Result.new(result["url"], result["title"], result["description"])
-    end
+    }
   end
 
   def url(query)

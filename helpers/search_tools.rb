@@ -2,18 +2,24 @@ require "httparty"
 require "uri"
 require "cgi"
 require "json"
+require "markaby"
 
 QueryBuilder = Struct.new(:query, :market, :safesearch, :offset, :count)
 Result = Struct.new(:url, :title, :snippet)
 
 module ResultTools
   def self.to_html(result)
-    "<a href=\"#{result.url}\">#{result.title}</a>
-    <br/> <br/>
-    #{result.url}
-    <br/> <br/>
-    #{result.snippet}
-    <br/> <br/>"
+    (Markaby::Builder.new do
+      a(result.title, href: result.url)
+      br
+      br
+      text result.url
+      br
+      br
+      text result.snippet
+      br
+      br
+    end).to_s
   end
 end
 

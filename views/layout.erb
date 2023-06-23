@@ -2,7 +2,11 @@
 <html lang>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
-    <title>tenBlueLinks</title>
+    <% if @title %>
+      <title> <%= "#{@title} || tenBlueLinks" %> </title>
+    <% else %>
+      <title>tenBlueLinks</title>
+    <% end %>
     <meta content="width=device-width,initial-scale=1" name="viewport"/>
     <link rel="stylesheet" href="styles.css">
   </head>

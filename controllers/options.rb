@@ -1,8 +1,10 @@
 get "/options" do
+  @title = "Edit Options"
   erb :options, :locals => { :options => langarray() }
 end
 
 get "/options/view" do
+  @title = "View Options"
   erb :options_view, layout: :layout
 end
 

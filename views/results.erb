@@ -1,6 +1,5 @@
-<title> <%= @query %> </title>
 <%= "<br/> " * 2 %>
-<h3>Search the Web</h3>
+<h3>Results for "<%= @query%>"</h3>
 <form action="/results" method="get">
   <input type="text" name="query" size="40" value="<%= @query %>">
   <input type="submit" value="Search">

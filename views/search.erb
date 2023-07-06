@@ -10,8 +10,8 @@
   <form action="/results" method="get">
     <input type="text" name="query" size="50" placeholder="Search for anything">
     <select name="engine">
-      <% Engines.each do |name, _engine| %>
-        <option value="<%= name %>"><%= name %></option>
+      <% Engines.each do |name, engine| %>
+        <option value="<%= name %>"><%= engine[0] %></option>
       <% end %>
     </select>
     <%= "<br/> " * 4 %>

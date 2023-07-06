@@ -11,14 +11,11 @@ module ResultTools
   def self.to_html(result)
     (Markaby::Builder.new do
       a(result.title, href: result.url)
-      br
-      br
+      2.times { br }
       text result.url
-      br
-      br
+      2.times { br }
       text result.snippet
-      br
-      br
+      2.times { br }
     end).to_s
   end
 end
@@ -32,7 +29,7 @@ class SearchEngine
 end
 
 module SearchEngines
-  def search_engine(name)
-    { name.downcase => Object.const_get("#{name}SearchEngine").new }
+  def self.search_engine(name, &search_block)
+    { name.downcase.to_sym => [name, search_block] }
   end
 end

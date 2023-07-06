@@ -1,6 +1,6 @@
 <div style="text-align: center;">
   <h1>Your Options</h1>
-  <form action="/options/save" method="get">
+  <form action="/options/save" method="post">
     <p>
       <% selected_where = cookies[:where] || "en-US" %>
       <select name="where">
@@ -14,7 +14,7 @@
       <option value="true" <%= 'selected' if selected_safe_search == 'true' %>>Strict</option>
       <option value="false" <%= 'selected' if selected_safe_search == 'false' %>>Moderate</option>
     </select>
-    <label for="safesearch">SafeSearch</label>
+    <label for="safesearch"> SafeSearch</label>
     <%= "<br/> " * 2 %>
     <input type="submit" value="Save">
   </form>

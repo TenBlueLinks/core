@@ -11,5 +11,5 @@ get "/results" do
 end
 
 def search_with(name, query)
-  Engines[name].search(query)
+  Engines[name.to_sym][1].call(query)
 end

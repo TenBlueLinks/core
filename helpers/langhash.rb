@@ -24,7 +24,7 @@ def langhash
     "Netherlands (Dutch)" => "nl-NL",
     "New Zealand (English)" => "en-NZ",
     "Norway (Norwegian)" => "no-NO",
-    "Peoples Republic of China (Chinese)" => "zh-CN",
+    "People's Republic of China (Chinese)" => "zh-CN",
     "Poland (Polish)" => "pl-PL",
     "Portugal (Portuguese)" => "pt-PT",
     "Philippines (English)" => "en-PH",

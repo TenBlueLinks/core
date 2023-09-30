@@ -6,7 +6,9 @@ end
 get "/results" do
   @query = URI.decode_www_form_component(params[:query])
   @title = "\"#{@query}\" Results"
-  @results = search_with(params[:engine], QueryBuilder.new(@query, cookies[:where], cookies[:safesearch], 0, 10))
+  @engine = params[:engine]
+  @results = search_with(params[:engine], QueryBuilder.new(@query, cookies[:where], cookies[:safesearch], (params[:page] || 0), 10))
+  @pages = next_and_prev_page(request.url)
   erb :results
 end
 

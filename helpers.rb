@@ -4,5 +4,5 @@ def require_helpers(helper_list)
   end
 end
 
-helper_list = %w[langhash engines html]
+helper_list = %w[langhash engines html pagination]
 require_helpers(helper_list)

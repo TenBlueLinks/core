@@ -5,3 +5,5 @@
 <% @results.each do |result| %>
     <%= ResultTools.to_html(result) %>
 <% end %>
+<br/>
+<%= HTMLizer.next_page(@next_page) %>

@@ -8,5 +8,11 @@ module HTMLizer
         end
       end).to_s
     end
+
+    def next_page(url)
+      (Markaby::Builder.new do
+        a "Next", href: url
+      end).to_s
+    end
   end
 end

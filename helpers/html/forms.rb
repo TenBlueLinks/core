@@ -9,13 +9,5 @@ module HTMLizer
         end
       end
     end
-
-    def next_page(url)
-      mab do
-        center do
-          a "Next ->", href: url
-        end
-      end
-    end
   end
 end

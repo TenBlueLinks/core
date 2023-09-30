@@ -1,7 +1,7 @@
 module HTMLizer
   class << self
     def options_viewer(where, safesearch)
-      (Markaby::Builder.new {
+      mab {
         h1 "Your Options"
         p do
           text "Your language and location are currently set to #{langhash().invert[where]}"
@@ -15,7 +15,7 @@ module HTMLizer
         a href: "/" do
           text "Back to Home"
         end
-      }).to_s
+      }
     end
   end
 end

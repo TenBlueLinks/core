@@ -1,4 +1,5 @@
 require_relative "search_tools"
+require_relative "dsl"
 
 def require_search_engines(engine_name_list)
   engine_name_list.each do |engine_name|
@@ -6,9 +7,7 @@ def require_search_engines(engine_name_list)
   end
 end
 
-engines = %w[Bing Brave] #GitHub
+engines = %w(Bing Brave) #GitHub
 require_search_engines(engines)
 
-Engines = engines
-  .map { |engine_name| SearchEngines.search_engine(engine_name, &Object.const_get("#{engine_name}SearchEngine").method(:search)) }
-  .reduce({}, :merge)
+Engines = SearchEngines.engines

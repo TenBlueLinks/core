@@ -1,6 +1,6 @@
 module HTMLizer
   def self.about()
-    (Markaby::Builder.new do
+    mab do
       div align: "center" do
         p do
           text "01110100 01100101 01101110 01000010"
@@ -13,7 +13,7 @@ module HTMLizer
         p "tenBlueLinks is a simple search engine designed for old browsers and slow internet connections."
         a "Back to Home", href: "/"
       end
-    end).to_s
+    end
   end
 end
 

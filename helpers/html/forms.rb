@@ -1,18 +1,19 @@
 module HTMLizer
   class << self
-    def search_form(query)
-      (Markaby::Builder.new do
+    def search_form(query, engine_name)
+      mab do
         form action: "/results", method: "get" do
           input type: "text", name: "query", size: "40", value: query
+          input type: "hidden", name: "engine", value: engine_name
           input type: "submit", value: "Search"
         end
-      end).to_s
+      end
     end
 
     def next_page(url)
-      (Markaby::Builder.new do
+      mab do
         a "Next", href: url
-      end).to_s
+      end
     end
   end
 end

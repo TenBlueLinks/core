@@ -6,7 +6,7 @@ module HTMLizer
         p do
           text "Your language and location are currently set to #{langhash().invert[where]}"
           br
-          text "#{if safesearch == "true" then "✅" else "❌" end} SafeSearch"
+          text "#{if safesearch == "true" then "✅" else "❌" end} SafeSearch" # unicode emojis breaking old browsers
         end
         a href: "/options" do
           text "Edit"

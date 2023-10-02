@@ -3,9 +3,9 @@ module SearchEngines
   @engines = {}
 
   def self.add(engine_name, &block)
-    engine = SearchEngineBuilder.new
-    engine.instance_eval(&block)
-    @engines[engine_name.downcase.to_sym] = [engine_name, engine.method(:search).to_proc]
+    engine = Class.new(SearchEngineBuilder)
+    engine.module_exec(&block)
+    @engines[engine_name.downcase.to_sym] = [engine_name, engine.new.method(:search).to_proc]
   end
 
   def self.engines
@@ -13,28 +13,80 @@ module SearchEngines
   end
 
   class SearchEngineBuilder
-    attr_accessor :url_block, :results_block, :headers_block
+    include HTTParty
+    attr_accessor :url_block, :results_block, :headers_block, :result_mapping
 
-    def initialize
-      @url_block = nil
-      @results_block = nil
-      @headers_block = nil
+    class << self
+      def endpoint(string)
+        define_method(:endpoint) { string }
+      end
+
+      def query(&block)
+        define_method(:query, &block)
+      end
+
+      def results(*result_mapping)
+        define_method(:results) { result_mapping }
+      end
+
+      def result(&block)
+        define_method(:result_mapping) { block }
+      end
     end
 
-    def url(&block)
-      @url_block = block
+    def search(query_builder)
+      map_results(self.class.get(endpoint, query: query(query_builder)))
     end
 
-    def results(&block)
-      @results_block = block
+    private
+
+    def map_results(response)
+      result_data = deep_fetch(response, results)
+      if result_mapping
+        result_data.map { |item| map_result(item) }
+      else
+        result_data
+      end
     end
 
-    def headers(&block)
-      @headers_block = block
+    def map_result(item)
+      if result_mapping
+        ResultMapper.new(item, &result_mapping).map
+      else
+        item
+      end
     end
 
-    def search(query)
-      @results_block.(JSON.parse(HTTParty.get(@url_block.(query), headers: @headers_block.()).body))
+    def deep_fetch(hsh, keys)
+      keys.reduce(hsh) { |h, key| h[key] }
+    end
+  end
+
+  class ResultMapper
+    def initialize(item, &block)
+      @item = item
+      @mapping_block = block
+    end
+
+    def map
+      instance_eval(&@mapping_block)
+      Result.new(@url, @title, @snippet)
+    end
+
+    def url(value)
+      @url = value
+    end
+
+    def title(value)
+      @title = value
+    end
+
+    def snippet(value)
+      @snippet = value
+    end
+
+    def [](key)
+      @item[key]
     end
   end
 end

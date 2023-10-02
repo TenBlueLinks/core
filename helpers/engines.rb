@@ -7,7 +7,7 @@ def require_search_engines(engine_name_list)
   end
 end
 
-engines = %w(Bing Brave) #GitHub
+engines = %w(Bing Brave GitHub YaCy)
 require_search_engines(engines)
 
 Engines = SearchEngines.engines

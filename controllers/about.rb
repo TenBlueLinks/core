@@ -17,7 +17,9 @@ module HTMLizer
   end
 end
 
-get "/about" do
-  @title = "About"
-  erb :about
+class TenBlueLinks
+  get "/about" do
+    @title = "About"
+    erb :about
+  end
 end

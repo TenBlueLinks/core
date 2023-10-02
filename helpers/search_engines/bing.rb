@@ -12,10 +12,10 @@ SearchEngines.add :Bing do
       count: builder.count,
     }
   end
-  results do |response|
-    response["webPages"]["value"].map {
-      |result|
-      Result.new(result["url"], result["name"], result["snippet"])
-    }
+  results "webPages", "value"
+  result do |i|
+    url i["url"]
+    title i["name"]
+    snippet i["snippet"]
   end
 end

@@ -12,10 +12,10 @@ SearchEngines.add :Brave do
       count: builder.count,
     }
   end
-  results do |response|
-    response["web"]["results"].map {
-      |result|
-      Result.new(result["url"], result["title"], result["description"])
-    }
+  results "web", "results"
+  result do |i|
+    url i["url"]
+    title i["title"]
+    snippet i["description"]
   end
 end

@@ -12,10 +12,10 @@ SearchEngines.add :GitHub do
       page: builder.offset,
     }
   end
-  results do |response|
-    response["items"].map {
-      |result|
-      Result.new(result["html_url"], result["full_name"], result["description"])
-    }
+  results "items"
+  result do |i|
+    url i["html_url"]
+    title i["full_name"]
+    snippet i["description"]
   end
 end

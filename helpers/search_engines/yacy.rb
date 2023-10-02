@@ -12,7 +12,10 @@ SearchEngines.add :YaCy do
       startRecord: ((builder.offset + 1) * builder.count),
     }
   end
-  results do |response|
-    response["channels"][0]["items"].map { |result| Result.new(result["link"], result["title"], result["description"]) }
+  results "channels", 0, "items"
+  result do |i|
+    url i["link"]
+    title i["title"]
+    snippet i["description"]
   end
 end

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Object - RDoc Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+  var index_rel_prefix = "./";
+</script>
+
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+<div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  <p class="link">BasicObject
+</div>
+
+    
+    
+    
+<!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    <li ><a href="#method-i-html_helpers">#html_helpers</a>
+    <li ><a href="#method-i-langhash">#langhash</a>
+    <li ><a href="#method-i-next_and_prev_page">#next_and_prev_page</a>
+    <li ><a href="#method-i-require_controllers">#require_controllers</a>
+    <li ><a href="#method-i-require_helpers">#require_helpers</a>
+    <li ><a href="#method-i-require_search_engines">#require_search_engines</a>
+    <li ><a href="#method-i-search_with">#search_with</a>
+    <li ><a href="#method-i-update_page_parameters">#update_page_parameters</a>
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Object">
+  <h1 id="class-Object" class="class">
+    class Object
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  <section id="5Buntitled-5D" class="documentation-section">
+
+
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+        <dt id="Engines">Engines
+        <dd>
+        <dt id="QueryBuilder">QueryBuilder
+        <dd>
+        <dt id="Result">Result
+        <dd>
+      </dl>
+    </section>
+
+
+
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+      <div id="method-i-html_helpers" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">html_helpers</span><span
+              class="method-args">(html_helpers_list)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="html_helpers-source">
+            <pre><span class="ruby-comment"># File app/helpers/html.rb, line 1</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">html_helpers</span>(<span class="ruby-identifier">html_helpers_list</span>)
+  <span class="ruby-identifier">html_helpers_list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">html_helper</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">require_relative</span> <span class="ruby-node">&quot;html/#{html_helper}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-langhash" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">langhash</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>@return [Hash{String-&gt;String}]</p>
+
+          <div class="method-source-code" id="langhash-source">
+            <pre><span class="ruby-comment"># File lib/langhash.rb, line 2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">langhash</span>
+  {
+    <span class="ruby-string">&quot;Argentina (Spanish)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;es-AR&quot;</span>,
+    <span class="ruby-string">&quot;Australia (English)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;en-AU&quot;</span>,
+    <span class="ruby-string">&quot;Austria (German)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;de-AT&quot;</span>,
+    <span class="ruby-string">&quot;Belgium (Dutch)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;nl-BE&quot;</span>,
+    <span class="ruby-string">&quot;Belgium (French)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;fr-BE&quot;</span>,
+    <span class="ruby-string">&quot;Brazil (Portuguese)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pt-BR&quot;</span>,
+    <span class="ruby-string">&quot;Canada (English)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;en-CA&quot;</span>,
+    <span class="ruby-string">&quot;Canada (French)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;fr-CA&quot;</span>,
+    <span class="ruby-string">&quot;Chile (Spanish)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;es-CL&quot;</span>,
+    <span class="ruby-string">&quot;Denmark (Danish)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;da-DK&quot;</span>,
+    <span class="ruby-string">&quot;Finland (Finnish)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;fi-FI&quot;</span>,
+    <span class="ruby-string">&quot;France (French)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;fr-FR&quot;</span>,
+    <span class="ruby-string">&quot;Germany (German)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;de-DE&quot;</span>,
+    <span class="ruby-string">&quot;Hong Kong (Traditional Chinese)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;zh-HK&quot;</span>,
+    <span class="ruby-string">&quot;India (English)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;en-IN&quot;</span>,
+    <span class="ruby-string">&quot;Indonesia (English)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;en-ID&quot;</span>,
+    <span class="ruby-string">&quot;Italy (Italian)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;it-IT&quot;</span>,
+    <span class="ruby-string">&quot;Japan (Japanese)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;ja-JP&quot;</span>,
+    <span class="ruby-string">&quot;Korea (Korean)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;ko-KR&quot;</span>,
+    <span class="ruby-string">&quot;Malaysia (English)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;en-MY&quot;</span>,
+    <span class="ruby-string">&quot;Mexico (Spanish)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;es-MX&quot;</span>,
+    <span class="ruby-string">&quot;Netherlands (Dutch)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;nl-NL&quot;</span>,
+    <span class="ruby-string">&quot;New Zealand (English)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;en-NZ&quot;</span>,
+    <span class="ruby-string">&quot;Norway (Norwegian)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;no-NO&quot;</span>,
+    <span class="ruby-string">&quot;People&#39;s Republic of China (Chinese)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;zh-CN&quot;</span>,
+    <span class="ruby-string">&quot;Poland (Polish)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pl-PL&quot;</span>,
+    <span class="ruby-string">&quot;Portugal (Portuguese)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pt-PT&quot;</span>,
+    <span class="ruby-string">&quot;Philippines (English)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;en-PH&quot;</span>,
+    <span class="ruby-string">&quot;Russia (Russian)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;ru-RU&quot;</span>,
+    <span class="ruby-string">&quot;Saudi Arabia (Arabic)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;ar-SA&quot;</span>,
+    <span class="ruby-string">&quot;South Africa (English)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;en-ZA&quot;</span>,
+    <span class="ruby-string">&quot;Spain (Spanish)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;es-ES&quot;</span>,
+    <span class="ruby-string">&quot;Sweden (Swedish)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;sv-SE&quot;</span>,
+    <span class="ruby-string">&quot;Switzerland (French)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;fr-CH&quot;</span>,
+    <span class="ruby-string">&quot;Switzerland (German)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;de-CH&quot;</span>,
+    <span class="ruby-string">&quot;Taiwan (Traditional Chinese)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;zh-TW&quot;</span>,
+    <span class="ruby-string">&quot;Turkey (Turkish)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;tr-TR&quot;</span>,
+    <span class="ruby-string">&quot;United Kingdom (English)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;en-GB&quot;</span>,
+    <span class="ruby-string">&quot;United States (English)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;en-US&quot;</span>,
+    <span class="ruby-string">&quot;United States (Spanish)&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;es-US&quot;</span>,
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-next_and_prev_page" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">next_and_prev_page</span><span
+              class="method-args">(url)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Generates a pagination bar with previous and next links.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p>url (String): The URL of the current page.</p>
+</li></ul>
+
+<p>Returns:</p>
+<ul><li>
+<p>String: The pagination bar.</p>
+</li></ul>
+
+          <div class="method-source-code" id="next_and_prev_page-source">
+            <pre><span class="ruby-comment"># File app/helpers/pagination.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">next_and_prev_page</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">prev_url</span>, <span class="ruby-identifier">next_url</span> = <span class="ruby-identifier">update_page_parameters</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">mab</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">center</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">a</span> <span class="ruby-string">&quot;&lt;-&quot;</span>, <span class="ruby-value">href:</span> <span class="ruby-identifier">prev_url</span>
+      <span class="ruby-identifier">a</span> <span class="ruby-string">&quot;-&gt;&quot;</span>, <span class="ruby-value">href:</span> <span class="ruby-identifier">next_url</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-require_controllers" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">require_controllers</span><span
+              class="method-args">(controller_names_list)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="require_controllers-source">
+            <pre><span class="ruby-comment"># File app/controllers.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_controllers</span>(<span class="ruby-identifier">controller_names_list</span>)
+  <span class="ruby-identifier">controller_names_list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">controller_name</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">require_relative</span> <span class="ruby-node">&quot;controllers/#{controller_name}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-require_helpers" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">require_helpers</span><span
+              class="method-args">(helper_list)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="require_helpers-source">
+            <pre><span class="ruby-comment"># File app/helpers.rb, line 1</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_helpers</span>(<span class="ruby-identifier">helper_list</span>)
+  <span class="ruby-identifier">helper_list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">helper</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">require_relative</span> <span class="ruby-node">&quot;helpers/#{helper}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-require_search_engines" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">require_search_engines</span><span
+              class="method-args">(engine_name_list)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          
+
+          <div class="method-source-code" id="require_search_engines-source">
+            <pre><span class="ruby-comment"># File lib/engines.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">require_search_engines</span>(<span class="ruby-identifier">engine_name_list</span>)
+  <span class="ruby-identifier">engine_name_list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">engine_name</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">require_relative</span> <span class="ruby-node">&quot;search_engines/#{engine_name.downcase}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-search_with" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">search_with</span><span
+              class="method-args">(name, query)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Searches for a specific item using the specified search engine.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p>name: The name of the search engine to use (String).</p>
+</li><li>
+<p>query: The search query (String).</p>
+</li></ul>
+
+<p>Returns:</p>
+<ul><li>
+<p><a href="Result">Array</a> An array of search results (depends on the search engine).</p>
+</li></ul>
+
+          <div class="method-source-code" id="search_with-source">
+            <pre><span class="ruby-comment"># File app/controllers/search.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_with</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">query</span>)
+  <span class="ruby-constant">Engines</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>][<span class="ruby-value">1</span>].<span class="ruby-identifier">call</span>(<span class="ruby-identifier">query</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div id="method-i-update_page_parameters" class="method-detail ">
+        <div class="method-header">
+          <div class="method-heading">
+            <span class="method-name">update_page_parameters</span><span
+              class="method-args">(url)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+        </div>
+
+        <div class="method-description">
+          <p>Updates the parameters of the given URL and returns the previous and next URLs.</p>
+
+<p>Parameters:</p>
+
+<pre>- url: A string representing the URL to update. Usually the current page of results.</pre>
+
+<p>Returns:</p>
+
+<pre>- A list of two strings:
+  - The previous URL with the updated page parameter.
+  - The next URL with the updated page parameter.</pre>
+
+          <div class="method-source-code" id="update_page_parameters-source">
+            <pre><span class="ruby-comment"># File app/helpers/pagination.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">update_page_parameters</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">params</span> = <span class="ruby-constant">Hash</span>[<span class="ruby-constant">URI</span>.<span class="ruby-identifier">decode_www_form</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">query</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;&quot;</span>)]
+  <span class="ruby-identifier">page</span> = (<span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;page&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;0&quot;</span>).<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-identifier">prev_url</span> = <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">u</span><span class="ruby-operator">|</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">query</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">encode_www_form</span>(<span class="ruby-identifier">params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-string">&quot;page&quot;</span> <span class="ruby-operator">=&gt;</span> [<span class="ruby-identifier">page</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>, <span class="ruby-value">0</span>].<span class="ruby-identifier">max</span>)) }
+  <span class="ruby-identifier">next_url</span> = <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">u</span><span class="ruby-operator">|</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">query</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">encode_www_form</span>(<span class="ruby-identifier">params</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-string">&quot;page&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">page</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)) }
+
+  [<span class="ruby-identifier">prev_url</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">next_url</span>.<span class="ruby-identifier">to_s</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+        </div>
+
+
+      </div>
+
+    </section>
+
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.5.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -20,3 +20,5 @@ gem 'rake', '~> 13.0.6'
 gem 'sassc', '~> 2.4.0'
 gem 'sorbet', '~> 0.5.1000'
 gem 'sorbet-runtime', '~> 0.5.1000'
+
+gem "yard", "~> 0.9.34"

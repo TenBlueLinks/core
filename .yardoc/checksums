@@ -1,0 +1,9 @@
+lib/dsl.rb f3b518588a839424dd2b9cadf8959eb3c8b9b16a
+lib/engines.rb abb33c7fc495545a8163e755829947d28094474d
+lib/service.rb 7b7133f8cecafe258412e9c6f88acbd7fada2404
+lib/langhash.rb 7cdea495b1026d9ab3d12687b040216404051594
+lib/search_tools.rb 465ad328026596df1eb44b8898b176497ed72467
+lib/search_engines/bing.rb a2654edf8263b70469e29647cff762835ee73f84
+lib/search_engines/yacy.rb 2f7ab8406bb5953b388c1ea55dd16763381702a3
+lib/search_engines/brave.rb 8926285c78d59f32dcd6ab533bd05b51c64e0b6b
+lib/search_engines/github.rb e56d70ffa4932eddad1729ad37a5c607f7c4f660

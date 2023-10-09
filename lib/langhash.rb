@@ -1,5 +1,5 @@
-# @return [Hash{String->String}]
-def SearchEngines.langhash
+# A hash of all the standard RFC 9110 Market Codes.
+SearchEngines::Languages =
   {
     "Argentina (Spanish)" => "es-AR",
     "Australia (English)" => "en-AU",
@@ -42,4 +42,4 @@ def SearchEngines.langhash
     "United States (English)" => "en-US",
     "United States (Spanish)" => "es-US",
   }
-end
+    .freeze

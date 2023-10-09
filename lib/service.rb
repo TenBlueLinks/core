@@ -1,4 +1,6 @@
-%w(engines dsl search_tools langhash).each &method(:require_relative)
+%w(engines dsl search_tools langhash).each do |f|
+  require_relative f
+end
 
 require "drb/drb"
 

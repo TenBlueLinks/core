@@ -1,7 +1,7 @@
 class TenBlueLinks
   get "/options" do
     @title = "Edit Options"
-    erb :options, :locals => { :options => Engines::Languages }
+    erb :options, :locals => { :options => Engines.Languages }
   end
 
   get "/options/view" do

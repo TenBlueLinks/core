@@ -57,5 +57,6 @@
     <orderEntry type="library" scope="PROVIDED" name="sprockets-helpers (v1.4.0, rbenv: 3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v2.3.0, rbenv: 3.2.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="unicode-display_width (v2.4.2, rbenv: 3.2.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="yard (v0.9.34, rbenv: 3.2.2) [gem]" level="application" />
   </component>
 </module>

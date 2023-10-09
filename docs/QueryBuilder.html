@@ -101,7 +101,41 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+<p>A struct which represents a query to a search engine.</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="SearchEngines.html#ISO3166-constant" title="SearchEngines::ISO3166 (constant)">SearchEngines::ISO3166</a></span></li>
+    
+  </ul>
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Shreyan Jain</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div>
 
 
 
@@ -111,7 +145,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#count-instance_method" title="#count (instance method)">#<strong>count</strong>  &#x21d2; Object </a>
+      <a href="#count-instance_method" title="#count (instance method)">#<strong>count</strong>  &#x21d2; Integer </a>
     
 
     
@@ -129,7 +163,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute count.</p>
+<p>The number of results to return.</p>
 </div></span>
   
 </li>
@@ -138,7 +172,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#market-instance_method" title="#market (instance method)">#<strong>market</strong>  &#x21d2; Object </a>
+      <a href="#market-instance_method" title="#market (instance method)">#<strong>market</strong>  &#x21d2; String </a>
     
 
     
@@ -156,7 +190,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute market.</p>
+<p>The market to search in, as defined by ISO 3166.</p>
 </div></span>
   
 </li>
@@ -165,7 +199,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#offset-instance_method" title="#offset (instance method)">#<strong>offset</strong>  &#x21d2; Object </a>
+      <a href="#offset-instance_method" title="#offset (instance method)">#<strong>offset</strong>  &#x21d2; Integer </a>
     
 
     
@@ -183,7 +217,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute offset.</p>
+<p>The offset of the search results.</p>
 </div></span>
   
 </li>
@@ -192,7 +226,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#query-instance_method" title="#query (instance method)">#<strong>query</strong>  &#x21d2; Object </a>
+      <a href="#query-instance_method" title="#query (instance method)">#<strong>query</strong>  &#x21d2; String </a>
     
 
     
@@ -210,7 +244,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute query.</p>
+<p>The string being searched for.</p>
 </div></span>
   
 </li>
@@ -219,7 +253,7 @@
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#safesearch-instance_method" title="#safesearch (instance method)">#<strong>safesearch</strong>  &#x21d2; Object </a>
+      <a href="#safesearch-instance_method" title="#safesearch (instance method)">#<strong>safesearch</strong>  &#x21d2; Boolean </a>
     
 
     
@@ -237,7 +271,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Returns the value of attribute safesearch.</p>
+<p>Whether to use safe search or not.</p>
 </div></span>
   
 </li>
@@ -258,7 +292,7 @@
       <div class="method_details first">
   <h3 class="signature first" id="count-instance_method">
   
-    #<strong>count</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>count</strong>  &#x21d2; <tt>Integer</tt> 
   
 
   
@@ -267,7 +301,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute count</p>
+<p>Returns the number of results to return. Usually Ten Blue Ones ;).</p>
 
 
   </div>
@@ -280,13 +314,13 @@
     <li>
       
       
-        <span class='type'>(<tt>Object</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>the current value of count</p>
+<p>the number of results to return. Usually Ten Blue Ones ;)</p>
 </div>
       
     </li>
@@ -299,16 +333,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/search_tools.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/search_tools.rb', line 24</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_count'>count</span>
-  <span class='ivar'>@count</span>
-<span class='kw'>end</span></pre>
+<span class='const'><span class='object_link'><a href="" title="QueryBuilder (class)">QueryBuilder</a></span></span> <span class='op'>=</span> <span class='const'>Struct</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:query</span><span class='comma'>,</span> <span class='symbol'>:market</span><span class='comma'>,</span> <span class='symbol'>:safesearch</span><span class='comma'>,</span> <span class='symbol'>:offset</span><span class='comma'>,</span> <span class='symbol'>:count</span><span class='rparen'>)</span></pre>
     </td>
   </tr>
 </table>
@@ -319,7 +349,7 @@
       <div class="method_details ">
   <h3 class="signature " id="market-instance_method">
   
-    #<strong>market</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>market</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -328,7 +358,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute market</p>
+<p>Returns the market to search in, as defined by ISO 3166. See <span class='object_link'><a href="SearchEngines.html#ISO3166-constant" title="SearchEngines::ISO3166 (constant)">SearchEngines::ISO3166</a></span>.</p>
 
 
   </div>
@@ -341,13 +371,13 @@
     <li>
       
       
-        <span class='type'>(<tt>Object</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>the current value of market</p>
+<p>the market to search in, as defined by ISO 3166. See <span class='object_link'><a href="SearchEngines.html#ISO3166-constant" title="SearchEngines::ISO3166 (constant)">SearchEngines::ISO3166</a></span></p>
 </div>
       
     </li>
@@ -360,16 +390,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/search_tools.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/search_tools.rb', line 24</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_market'>market</span>
-  <span class='ivar'>@market</span>
-<span class='kw'>end</span></pre>
+<span class='const'><span class='object_link'><a href="" title="QueryBuilder (class)">QueryBuilder</a></span></span> <span class='op'>=</span> <span class='const'>Struct</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:query</span><span class='comma'>,</span> <span class='symbol'>:market</span><span class='comma'>,</span> <span class='symbol'>:safesearch</span><span class='comma'>,</span> <span class='symbol'>:offset</span><span class='comma'>,</span> <span class='symbol'>:count</span><span class='rparen'>)</span></pre>
     </td>
   </tr>
 </table>
@@ -380,7 +406,7 @@
       <div class="method_details ">
   <h3 class="signature " id="offset-instance_method">
   
-    #<strong>offset</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>offset</strong>  &#x21d2; <tt>Integer</tt> 
   
 
   
@@ -389,7 +415,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute offset</p>
+<p>Returns the offset of the search results. Used for pagination.</p>
 
 
   </div>
@@ -402,13 +428,13 @@
     <li>
       
       
-        <span class='type'>(<tt>Object</tt>)</span>
+        <span class='type'>(<tt>Integer</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>the current value of offset</p>
+<p>the offset of the search results. Used for pagination.</p>
 </div>
       
     </li>
@@ -421,16 +447,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/search_tools.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/search_tools.rb', line 24</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_offset'>offset</span>
-  <span class='ivar'>@offset</span>
-<span class='kw'>end</span></pre>
+<span class='const'><span class='object_link'><a href="" title="QueryBuilder (class)">QueryBuilder</a></span></span> <span class='op'>=</span> <span class='const'>Struct</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:query</span><span class='comma'>,</span> <span class='symbol'>:market</span><span class='comma'>,</span> <span class='symbol'>:safesearch</span><span class='comma'>,</span> <span class='symbol'>:offset</span><span class='comma'>,</span> <span class='symbol'>:count</span><span class='rparen'>)</span></pre>
     </td>
   </tr>
 </table>
@@ -441,7 +463,7 @@
       <div class="method_details ">
   <h3 class="signature " id="query-instance_method">
   
-    #<strong>query</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>query</strong>  &#x21d2; <tt>String</tt> 
   
 
   
@@ -450,7 +472,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute query</p>
+<p>Returns the string being searched for.</p>
 
 
   </div>
@@ -463,13 +485,13 @@
     <li>
       
       
-        <span class='type'>(<tt>Object</tt>)</span>
+        <span class='type'>(<tt>String</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>the current value of query</p>
+<p>the string being searched for.</p>
 </div>
       
     </li>
@@ -482,16 +504,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/search_tools.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/search_tools.rb', line 24</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_query'>query</span>
-  <span class='ivar'>@query</span>
-<span class='kw'>end</span></pre>
+<span class='const'><span class='object_link'><a href="" title="QueryBuilder (class)">QueryBuilder</a></span></span> <span class='op'>=</span> <span class='const'>Struct</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:query</span><span class='comma'>,</span> <span class='symbol'>:market</span><span class='comma'>,</span> <span class='symbol'>:safesearch</span><span class='comma'>,</span> <span class='symbol'>:offset</span><span class='comma'>,</span> <span class='symbol'>:count</span><span class='rparen'>)</span></pre>
     </td>
   </tr>
 </table>
@@ -502,7 +520,7 @@
       <div class="method_details ">
   <h3 class="signature " id="safesearch-instance_method">
   
-    #<strong>safesearch</strong>  &#x21d2; <tt>Object</tt> 
+    #<strong>safesearch</strong>  &#x21d2; <tt>Boolean</tt> 
   
 
   
@@ -511,7 +529,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns the value of attribute safesearch</p>
+<p>Returns whether to use safe search or not.</p>
 
 
   </div>
@@ -524,13 +542,13 @@
     <li>
       
       
-        <span class='type'>(<tt>Object</tt>)</span>
+        <span class='type'>(<tt>Boolean</tt>)</span>
       
       
       
         &mdash;
         <div class='inline'>
-<p>the current value of safesearch</p>
+<p>whether to use safe search or not.</p>
 </div>
       
     </li>
@@ -543,16 +561,12 @@
       <pre class="lines">
 
 
-9
-10
-11</pre>
+24</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/search_tools.rb', line 9</span>
+      <pre class="code"><span class="info file"># File 'lib/search_tools.rb', line 24</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_safesearch'>safesearch</span>
-  <span class='ivar'>@safesearch</span>
-<span class='kw'>end</span></pre>
+<span class='const'><span class='object_link'><a href="" title="QueryBuilder (class)">QueryBuilder</a></span></span> <span class='op'>=</span> <span class='const'>Struct</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:query</span><span class='comma'>,</span> <span class='symbol'>:market</span><span class='comma'>,</span> <span class='symbol'>:safesearch</span><span class='comma'>,</span> <span class='symbol'>:offset</span><span class='comma'>,</span> <span class='symbol'>:count</span><span class='rparen'>)</span></pre>
     </td>
   </tr>
 </table>
@@ -564,7 +578,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct  9 12:16:35 2023 by
+  Generated on Mon Oct  9 15:37:06 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>

@@ -1,5 +1,6 @@
-# A hash of all the standard RFC 9110 Market Codes.
-SearchEngines::Languages =
+# A hash of all the standard ISO 3166-1 Market Codes.
+# Includes their human-readable names, mapped to their ISO 3166-1 alpha-2 codes.
+SearchEngines::ISO3166 =
   {
     "Argentina (Spanish)" => "es-AR",
     "Australia (English)" => "en-AU",
@@ -43,3 +44,10 @@ SearchEngines::Languages =
     "United States (Spanish)" => "es-US",
   }
     .freeze
+
+# (see SearchEngines::ISO3166)
+# @return [Hash<String, String>] (see SearchEngines::ISO3166)
+# @see SearchEngines::ISO3166
+def SearchEngines.Languages
+  return SearchEngines::ISO3166
+end

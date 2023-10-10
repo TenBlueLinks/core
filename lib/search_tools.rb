@@ -6,6 +6,15 @@ require "cgi"
 require "json"
 require "markaby/kernel_method"
 
+class Struct
+  # Converts the object to a JSON string.
+  #
+  # @return [String] the JSON representation of the object.
+  def to_json
+    to_h.to_json
+  end
+end
+
 =begin
 A struct which represents a query to a search engine.
 @author Shreyan Jain

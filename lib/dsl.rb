@@ -1,13 +1,20 @@
 # frozen_string_literal: true
 
-# This file contains the DSL for the search engine configuration.
+# This module contains the DSL for the search engine configuration.
 #
+# @author Shreyan Jain
+# It also serves as the front object for DRb connectors. It's a big module because it has a lot of responsibilities.
 module SearchEngines
   # A hash to store search engine configurations
   @engines = {}
 
   # Adds a search engine to the list of available engines.
+  # @example Adding the Bing API
+  #   {include:file:lib/search_engines/bing.rb}
+  # @example Adding the Brave Search Engine's API
+  #   {include:file:lib/search_engines/brave.rb}
   #
+  # @file search_engines/brave.rb
   # @param [Symbol] engine_name The name of the engine.
   # @param [Proc] block A block of code representing the search engine configuration.
   def self.add(engine_name, &block)
@@ -55,6 +62,10 @@ module SearchEngines
   # of your search engine that must come together to satisfy the requirements of the default
   # {#search} method. However, you may redefine the {#search} method to suit your needs, as long as
   # it takes a {QueryBuilder} as an argument and returns an array of {Result}s.
+  # The {#search} method looks like the following:
+  # {render:#search}
+  # @author Shreyan Jain
+  # @abstract
   class SearchEngineBuilder
     include HTTParty
 
@@ -65,6 +76,24 @@ module SearchEngines
         define_method(:endpoint) { string }
       end
 
+      # Defines a method that takes a block as an argument and assigns it as the implementation of the `query` method.
+      #
+      # Pass it a block that takes a {QueryBuilder} as an input, and returns a hash
+      # which will be encoded in the URI query string as GET params.
+      # @example
+      #   SearchEngines.add :Bing do
+      #     query do |builder|
+      #       {
+      #         q: CGI.escape(builder.query),
+      #         mkt: builder.market,
+      #         SafeSearch: builder.safesearch ? 'strict' : 'moderate',
+      #         offset: builder.offset,
+      #         count: builder.count
+      #       }
+      #     end
+      #   end
+      # @param block [Proc] The block to be assigned as the implementation of the `query` method.
+      # @return [Symbol] Nothing important, just the symbol :query for the `query` method.
       def query(&block)
         define_method(:query, &block)
       end
@@ -121,7 +150,12 @@ module SearchEngines
       @mapping_block = block
     end
 
-    # Evaluates the given block in the context of the current instance. The block is expected to contain a mapping logic that assigns values to instance variables, usually by using the `url`, `title`, and `snippet` methods. After evaluating the block, the method creates a new `Result` object with the values assigned to `@url`, `@title`, and `@snippet`.
+    # Evaluates the given block in the context of the current instance.
+    # The block is expected to contain a mapping logic that assigns
+    # values to instance variables, usually by using the
+    # `url`, `title`, and `snippet` methods. After evaluating
+    # the block, the method creates a new `Result` object with
+    # the values assigned to `@url`, `@title`, and `@snippet`.
     #
     # @return [Result] The newly created `Result` object.
     def map
@@ -141,8 +175,15 @@ module SearchEngines
       @snippet = value
     end
 
-    def [](key)
-      @item[key]
+    private def method_missing(name, *args)
+      unless @item.respond_to?(name)
+        super
+      else
+        @item.send(name, *args)
+      end
+    end
+    private def respond_to_missing? name, include_private = false
+      @item.respond_to?(name) || super
     end
   end
 end

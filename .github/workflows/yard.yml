@@ -1,35 +1,32 @@
-name: Build and Publish YardDocs
+@add typo 
+name: Yard Documentation
 
 on:
   push:
     branches:
-      - main
+      - main  
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Ruby environment
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.2
-
-    - name: Install Bundler and dependencies
-      run: |
-        gem install bundler
-        bundle install
-
-    - name: Build YardDocs
-      run: rake yard
-
-    - name: Deploy to GitHub Pages
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git fetch --unshallow || true
-        git branch -m gh-pages
-        git push -f origin gh-pages
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set up Ruby environment
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2
+      - name: Install dependencies
+        run: |
+          bundle 
+          
+      - name: Generate Yard documentation
+        run: |
+          rake yard
+          
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs

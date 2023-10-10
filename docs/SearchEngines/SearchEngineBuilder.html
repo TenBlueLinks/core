@@ -187,12 +187,12 @@
       <pre class="code ruby"><code class="ruby">
 
 
-<span class='int'>117</span>
-<span class='int'>118</span>
-<span class='int'>119</span></code></pre>
+<span class='int'>157</span>
+<span class='int'>158</span>
+<span class='int'>159</span></code></pre>
     </td>
     <td>
-      <pre class="code ruby"><code class="ruby"><span class="info file"># File 'lib/dsl.rb', line 117</span>
+      <pre class="code ruby"><code class="ruby"><span class="info file"># File 'lib/dsl.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search'>search</span><span class='lparen'>(</span><span class='id identifier rubyid_query_builder'>query_builder</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_map_results'>map_results</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span> <span class='label'>query:</span> <span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='id identifier rubyid_query_builder'>query_builder</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -209,6 +209,13 @@
 </div>
 <div class="tags">
   
+
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="../SearchEngines.html#add-class_method" title="SearchEngines.add (method)">add</a></span></li>
+    
+  </ul>
 <p class="tag_title">Author:</p>
 <ul class="author">
   
@@ -402,12 +409,12 @@
       <pre class="lines">
 
 
-76
-77
-78</pre>
+116
+117
+118</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 76</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:endpoint</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_string'>string</span> <span class='rbrace'>}</span>
@@ -501,12 +508,12 @@
       <pre class="lines">
 
 
-98
-99
-100</pre>
+138
+139
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 98</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 138</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:query</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -531,12 +538,12 @@
       <pre class="lines">
 
 
-106
-107
-108</pre>
+146
+147
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 106</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 146</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_result'>result</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:result_mapping</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_block'>block</span> <span class='rbrace'>}</span>
@@ -561,12 +568,12 @@
       <pre class="lines">
 
 
-102
-103
-104</pre>
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 142</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_results'>results</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_result_mapping'>result_mapping</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:results</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_result_mapping'>result_mapping</span> <span class='rbrace'>}</span>
@@ -646,12 +653,12 @@
       <pre class="lines">
 
 
-117
-118
-119</pre>
+157
+158
+159</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search'>search</span><span class='lparen'>(</span><span class='id identifier rubyid_query_builder'>query_builder</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_map_results'>map_results</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span> <span class='label'>query:</span> <span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='id identifier rubyid_query_builder'>query_builder</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -666,7 +673,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct  9 18:05:43 2023 by
+  Generated on Mon Oct  9 20:23:49 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>

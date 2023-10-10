@@ -9,12 +9,52 @@ module SearchEngines
   @engines = {}
 
   # Adds a search engine to the list of available engines.
-  # @example Adding the Bing API
-  #   {include:file:lib/search_engines/bing.rb}
   # @example Adding the Brave Search Engine's API
-  #   {include:file:lib/search_engines/brave.rb}
+  #   SearchEngines.add :Brave do
+  #     base_uri 'https://api.search.brave.com/'
+  #     endpoint '/res/v1/web/search'
+  #     format :json
+  #     headers "X-Subscription-Token": ENV['BRAVE_TOKEN']
+  #     query do |builder|
+  #       {
+  #         q: CGI.escape(builder.query),
+  #         ui_lang: builder.market,
+  #         safesearch: builder.safesearch ? 'strict' : 'moderate',
+  #         offset: builder.offset,
+  #         count: builder.count
+  #       }
+  #     end
+  #     results 'web', 'results'
+  #     result do |i|
+  #       url i['url']
+  #       title i['title']
+  #       snippet i['description']
+  #     end
+  #   end
+  # @example Adding the Bing Search Engine's API
+  #   SearchEngines.add :Bing do
+  #     base_uri 'https://api.bing.microsoft.com/'
+  #     endpoint '/v7.0/search'
+  #     format :json
+  #     headers "Ocp-Apim-Subscription-Key": ENV['BING_API_KEY']
+  #     query do |builder|
+  #       {
+  #         q: CGI.escape(builder.query),
+  #         mkt: builder.market,
+  #         SafeSearch: builder.safesearch ? 'strict' : 'moderate',
+  #         offset: builder.offset,
+  #         count: builder.count
+  #         }
+  #     end
+  #     results 'webPages', 'value'
+  #     result do |i|
+  #       url i['url']
+  #       title i['name']
+  #       snippet i['snippet']
+  #     end
+  #   end
+  # @see SearchEngineBuilder
   #
-  # @file search_engines/brave.rb
   # @param [Symbol] engine_name The name of the engine.
   # @param [Proc] block A block of code representing the search engine configuration.
   def self.add(engine_name, &block)
@@ -62,6 +102,7 @@ module SearchEngines
   # of your search engine that must come together to satisfy the requirements of the default
   # {#search} method. However, you may redefine the {#search} method to suit your needs, as long as
   # it takes a {QueryBuilder} as an argument and returns an array of {Result}s.
+  # @see SearchEngines.add
   # The {#search} method looks like the following:
   # {render:#search}
   # @author Shreyan Jain
@@ -182,7 +223,7 @@ module SearchEngines
         @item.send(name, *args)
       end
     end
-    private def respond_to_missing? name, include_private = false
+    private def respond_to_missing?(name, include_private = false)
       @item.respond_to?(name) || super
     end
   end

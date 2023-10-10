@@ -91,13 +91,31 @@
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
     
-<p>This file contains the DSL for the search engine configuration.</p>
+<p>This module contains the DSL for the search engine configuration.</p>
+
+<p>It also serves as the front object for DRb connectors. It’s a big module because it has a lot of responsibilities.</p>
 
 
   </div>
 </div>
 <div class="tags">
   
+<p class="tag_title">Author:</p>
+<ul class="author">
+  
+    <li>
+      
+      
+      
+      
+        
+        <div class='inline'>
+<p>Shreyan Jain</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div><h2>Defined Under Namespace</h2>
 <p class="children">
@@ -413,12 +431,12 @@
       <pre class="lines">
 
 
-28
-29
-30</pre>
+67
+68
+69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 28</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_engine_name'>engine_name</span><span class='rparen'>)</span>
   <span class='ivar'>@engines</span><span class='lbracket'>[</span><span class='id identifier rubyid_engine_name'>engine_name</span><span class='period'>.</span><span class='id identifier rubyid_downcase'>downcase</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span>
@@ -452,17 +470,57 @@
     
       
         <p class="example_title"><div class='inline'>
-<p>Adding the Bing API</p>
-</div></p>
-      
-      <pre class="example code"><code>@include file:lib/search_engines/bing.rb</code></pre>
-    
-      
-        <p class="example_title"><div class='inline'>
 <p>Adding the Brave Search Engine’s API</p>
 </div></p>
       
-      <pre class="example code"><code>@file search_engines/brave.rb</code></pre>
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="SearchEngines (module)">SearchEngines</a></span></span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span> <span class='symbol'>:Brave</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_base_uri'>base_uri</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>https://api.search.brave.com/</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/res/v1/web/search</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_format'>format</span> <span class='symbol'>:json</span>
+  <span class='id identifier rubyid_headers'>headers</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>X-Subscription-Token</span><span class='label_end'>&quot;:</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>BRAVE_TOKEN</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_query'>query</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_builder'>builder</span><span class='op'>|</span>
+    <span class='lbrace'>{</span>
+      <span class='label'>q:</span> <span class='const'>CGI</span><span class='period'>.</span><span class='id identifier rubyid_escape'>escape</span><span class='lparen'>(</span><span class='id identifier rubyid_builder'>builder</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='label'>ui_lang:</span> <span class='id identifier rubyid_builder'>builder</span><span class='period'>.</span><span class='id identifier rubyid_market'>market</span><span class='comma'>,</span>
+      <span class='label'>safesearch:</span> <span class='id identifier rubyid_builder'>builder</span><span class='period'>.</span><span class='id identifier rubyid_safesearch'>safesearch</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>strict</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>moderate</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+      <span class='label'>offset:</span> <span class='id identifier rubyid_builder'>builder</span><span class='period'>.</span><span class='id identifier rubyid_offset'>offset</span><span class='comma'>,</span>
+      <span class='label'>count:</span> <span class='id identifier rubyid_builder'>builder</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span>
+    <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_results'>results</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>web</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>results</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_result'>result</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+    <span class='id identifier rubyid_url'>url</span> <span class='id identifier rubyid_i'>i</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>url</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_title'>title</span> <span class='id identifier rubyid_i'>i</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>title</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_snippet'>snippet</span> <span class='id identifier rubyid_i'>i</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>description</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
+    
+      
+        <p class="example_title"><div class='inline'>
+<p>Adding the Bing Search Engine’s API</p>
+</div></p>
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="" title="SearchEngines (module)">SearchEngines</a></span></span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span> <span class='symbol'>:Bing</span> <span class='kw'>do</span>
+  <span class='id identifier rubyid_base_uri'>base_uri</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>https://api.bing.microsoft.com/</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_endpoint'>endpoint</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>/v7.0/search</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_format'>format</span> <span class='symbol'>:json</span>
+  <span class='id identifier rubyid_headers'>headers</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Ocp-Apim-Subscription-Key</span><span class='label_end'>&quot;:</span> <span class='const'>ENV</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>BING_API_KEY</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='id identifier rubyid_query'>query</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_builder'>builder</span><span class='op'>|</span>
+    <span class='lbrace'>{</span>
+      <span class='label'>q:</span> <span class='const'>CGI</span><span class='period'>.</span><span class='id identifier rubyid_escape'>escape</span><span class='lparen'>(</span><span class='id identifier rubyid_builder'>builder</span><span class='period'>.</span><span class='id identifier rubyid_query'>query</span><span class='rparen'>)</span><span class='comma'>,</span>
+      <span class='label'>mkt:</span> <span class='id identifier rubyid_builder'>builder</span><span class='period'>.</span><span class='id identifier rubyid_market'>market</span><span class='comma'>,</span>
+      <span class='label'>SafeSearch:</span> <span class='id identifier rubyid_builder'>builder</span><span class='period'>.</span><span class='id identifier rubyid_safesearch'>safesearch</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>strict</span><span class='tstring_end'>&#39;</span></span> <span class='op'>:</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>moderate</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span>
+      <span class='label'>offset:</span> <span class='id identifier rubyid_builder'>builder</span><span class='period'>.</span><span class='id identifier rubyid_offset'>offset</span><span class='comma'>,</span>
+      <span class='label'>count:</span> <span class='id identifier rubyid_builder'>builder</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span>
+      <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
+  <span class='id identifier rubyid_results'>results</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>webPages</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>value</span><span class='tstring_end'>&#39;</span></span>
+  <span class='id identifier rubyid_result'>result</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+    <span class='id identifier rubyid_url'>url</span> <span class='id identifier rubyid_i'>i</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>url</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_title'>title</span> <span class='id identifier rubyid_i'>i</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>name</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+    <span class='id identifier rubyid_snippet'>snippet</span> <span class='id identifier rubyid_i'>i</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>snippet</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span></code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -503,20 +561,27 @@
 </ul>
 
 
+  <p class="tag_title">See Also:</p>
+  <ul class="see">
+    
+      <li><span class='object_link'><a href="SearchEngines/SearchEngineBuilder.html" title="SearchEngines::SearchEngineBuilder (class)">SearchEngineBuilder</a></span></li>
+    
+  </ul>
+
 </div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-21
-22
-23
-24
-25</pre>
+60
+61
+62
+63
+64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 21</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 60</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_add'>add</span><span class='lparen'>(</span><span class='id identifier rubyid_engine_name'>engine_name</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_engine'>engine</span> <span class='op'>=</span> <span class='const'>Class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="SearchEngines/SearchEngineBuilder.html" title="SearchEngines::SearchEngineBuilder (class)">SearchEngineBuilder</a></span></span><span class='rparen'>)</span>
@@ -543,12 +608,12 @@
       <pre class="lines">
 
 
-45
-46
-47</pre>
+84
+85
+86</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 45</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 84</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@engines</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -602,12 +667,12 @@
       <pre class="lines">
 
 
-56
-57
-58</pre>
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 56</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_engines'>engines</span>
   <span class='ivar'>@engines</span>
@@ -808,12 +873,12 @@
       <pre class="lines">
 
 
-41
-42
-43</pre>
+80
+81
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 41</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 80</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_search_with'>search_with</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='id identifier rubyid_query'>query</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_engines'>engines</span><span class='lbracket'>[</span><span class='id identifier rubyid_name'>name</span><span class='period'>.</span><span class='id identifier rubyid_to_sym'>to_sym</span><span class='rbracket'>]</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_query'>query</span><span class='rparen'>)</span>
@@ -828,7 +893,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct  9 18:05:43 2023 by
+  Generated on Mon Oct  9 20:23:49 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>

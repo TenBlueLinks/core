@@ -26,7 +26,7 @@ A struct which represents a query to a search engine.
 @!attribute safesearch [rw]
   @return [Boolean] whether to use safe search or not.
 @!attribute offset [rw]
-  @return [Integer] the offset of the search results. Used for pagination.
+  @return [Integer] the offset of the search results, you might think of this as the page number. Used for pagination.
 @!attribute count [rw]
   @return [Integer] the number of results to return. Usually Ten Blue Ones ;)
 =end

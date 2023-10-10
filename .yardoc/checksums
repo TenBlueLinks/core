@@ -1,8 +1,8 @@
-lib/dsl.rb cc94dc12c31163a2ca917e03fc8ae4ab65007149
+lib/dsl.rb 567371f45971c4f4bda137eee03dbac1e22d5c09
 lib/engines.rb 59af53fe0068e2255f84585eae4d1c82b7ac803a
 lib/service.rb 360cddaf1d447acd7584a7c197b55bc65333458b
 lib/langhash.rb 1b7e6f7c1028849b4feaccce6f465c514d615982
-lib/search_tools.rb e7682bc041a258c31ca83ea81f09648c46f1669e
+lib/search_tools.rb 2ee4606fc5c7cb314fcf7900004820460ee24604
 lib/search_engines/bing.rb a2654edf8263b70469e29647cff762835ee73f84
 lib/search_engines/yacy.rb 2f7ab8406bb5953b388c1ea55dd16763381702a3
 lib/search_engines/brave.rb 8926285c78d59f32dcd6ab533bd05b51c64e0b6b

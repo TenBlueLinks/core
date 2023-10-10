@@ -117,28 +117,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#[]-instance_method" title="#[] (instance method)">#<strong>[]</strong>(key)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(item, &amp;block)  &#x21d2; ResultMapper </a>
     
 
@@ -284,17 +262,63 @@
       <pre class="lines">
 
 
-119
-120
-121
-122</pre>
+189
+190
+191
+192</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 119</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 189</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@item</span> <span class='op'>=</span> <span class='id identifier rubyid_item'>item</span>
   <span class='ivar'>@mapping_block</span> <span class='op'>=</span> <span class='id identifier rubyid_block'>block</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+<div id="method_missing_details" class="method_details_list">
+  <h2>Dynamic Method Handling</h2>
+  <p class="notice this">
+    This class handles dynamic methods through the <tt>method_missing</tt> method
+    
+  </p>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="method_missing-instance_method">
+  
+    #<strong>method_missing</strong>(name, *args)  &#x21d2; <tt>Object</tt>  <span class="extras">(private)</span>
+  
+
+  
+
+  
+</h3><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+219
+220
+221
+222
+223
+224
+225</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 219</span>
+
+<span class='id identifier rubyid_private'>private</span> <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='kw'>unless</span> <span class='ivar'>@item</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
+    <span class='kw'>super</span>
+  <span class='kw'>else</span>
+    <span class='ivar'>@item</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+  <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -309,37 +333,7 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="[]-instance_method">
-  
-    #<strong>[]</strong>(key)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-144
-145
-146</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 144</span>
-
-<span class='kw'>def</span> <span class='op'>[]</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span>
-  <span class='ivar'>@item</span><span class='lbracket'>[</span><span class='id identifier rubyid_key'>key</span><span class='rbracket'>]</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="map-instance_method">
+  <h3 class="signature first" id="map-instance_method">
   
     #<strong>map</strong>  &#x21d2; <tt><span class='object_link'><a href="../Result.html" title="Result (class)">Result</a></span></tt> 
   
@@ -382,13 +376,13 @@
       <pre class="lines">
 
 
-127
-128
-129
-130</pre>
+202
+203
+204
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 202</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_map'>map</span>
   <span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='ivar'>@mapping_block</span><span class='rparen'>)</span>
@@ -414,12 +408,12 @@
       <pre class="lines">
 
 
-140
-141
-142</pre>
+215
+216
+217</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 140</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 215</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_snippet'>snippet</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='ivar'>@snippet</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
@@ -444,12 +438,12 @@
       <pre class="lines">
 
 
-136
-137
-138</pre>
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 211</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_title'>title</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='ivar'>@title</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
@@ -474,12 +468,12 @@
       <pre class="lines">
 
 
-132
-133
-134</pre>
+207
+208
+209</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 132</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 207</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_url'>url</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
   <span class='ivar'>@url</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
@@ -494,7 +488,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct  9 15:37:05 2023 by
+  Generated on Mon Oct  9 20:23:49 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>

@@ -6,42 +6,29 @@ require "cgi"
 require "json"
 require "markaby/kernel_method"
 
-class Struct
-  # Converts the object to a JSON string.
-  #
-  # @return [String] the JSON representation of the object.
-  def to_json
-    to_h.to_json
-  end
-end
-
-=begin
-A struct which represents a query to a search engine.
-@author Shreyan Jain
-@see SearchEngines::ISO3166
-@!attribute query [rw]
-  @return [String] the string being searched for.
-@!attribute market [rw]
-  @return [String] the market to search in, as defined by ISO 3166. See {SearchEngines::ISO3166}
-@!attribute safesearch [rw]
-  @return [Boolean] whether to use safe search or not.
-@!attribute offset [rw]
-  @return [Integer] the offset of the search results, you might think of this as the page number. Used for pagination.
-@!attribute count [rw]
-  @return [Integer] the number of results to return. Usually Ten Blue Ones ;)
-=end
+# A struct which represents a query to a search engine.
+# @author Shreyan Jain
+# @see SearchEngines::ISO3166
+# @!attribute query [rw]
+#   @return [String] the string being searched for.
+# @!attribute market [rw]
+#   @return [String] the market to search in, as defined by ISO 3166. See {SearchEngines::ISO3166}
+# @!attribute safesearch [rw]
+#   @return [Boolean] whether to use safe search or not.
+# @!attribute offset [rw]
+#   @return [Integer] the offset of the search results, you might think of this as the page number. Used for pagination.
+# @!attribute count [rw]
+#   @return [Integer] the number of results to return. Usually Ten Blue Ones ;)
 QueryBuilder = Struct.new(:query, :market, :safesearch, :offset, :count)
 
-=begin
-A struct which represents a search result. Will be documented much better soon.
-@author Shreyan Jain
-@!attribute url [r]
-  @return [String] the URL of the search result.
-@!attribute title [r]
-  @return [String] the title of the search result.
-@!attribute snippet [r]
-  @return [String] the snippet of the search result.
-=end
+# A struct which represents a search result. Will be documented much better soon.
+# @author Shreyan Jain
+# @!attribute url [r]
+#   @return [String] the URL of the search result.
+# @!attribute title [r]
+#   @return [String] the title of the search result.
+# @!attribute snippet [r]
+#   @return [String] the snippet of the search result.
 Result = Struct.new(:url, :title, :snippet) do
   # @return [String] An HTML representation of the search result, to be rendered in the results page.
   def to_html

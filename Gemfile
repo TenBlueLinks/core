@@ -22,3 +22,7 @@ gem 'sorbet', '~> 0.5.1000'
 gem 'sorbet-runtime', '~> 0.5.1000'
 
 gem "yard", "~> 0.9.34"
+
+gem "yard-link_stdlib", "~> 0.1.7"
+
+gem "rufus-lua", "~> 1.1.5"

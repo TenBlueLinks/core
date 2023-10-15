@@ -1,0 +1,289 @@
+# This module contains the DSL for the search engine configuration.
+# 
+# @author Shreyan Jain
+# It also serves as the front object for DRb connectors. It's a big module because it has a lot of responsibilities.
+module SearchEngines
+  extend Enumerable
+  ISO3166: untyped
+
+  # sord omit - no YARD return type given, using untyped
+  # Adds a search engine to the list of available engines.
+  # 
+  # _@param_ `engine_name` — The name of the engine.
+  # 
+  # _@param_ `block` — A block of code representing the search engine configuration.
+  # 
+  # Adding the Brave Search Engine's API
+  # ```ruby
+  # SearchEngines.add :Brave do
+  #   base_uri 'https://api.search.brave.com/'
+  #   endpoint '/res/v1/web/search'
+  #   format :json
+  #   headers "X-Subscription-Token": ENV['BRAVE_TOKEN']
+  #   query do |builder|
+  #     {
+  #       q: CGI.escape(builder.query),
+  #       ui_lang: builder.market,
+  #       safesearch: builder.safesearch ? 'strict' : 'moderate',
+  #       offset: builder.offset,
+  #       count: builder.count
+  #     }
+  #   end
+  #   results 'web', 'results'
+  #   result do |i|
+  #     url i['url']
+  #     title i['title']
+  #     snippet i['description']
+  #   end
+  # end
+  # ```
+  # 
+  # Adding the Bing Search Engine's API
+  # ```ruby
+  # SearchEngines.add :Bing do
+  #   base_uri 'https://api.bing.microsoft.com/'
+  #   endpoint '/v7.0/search'
+  #   format :json
+  #   headers "Ocp-Apim-Subscription-Key": ENV['BING_API_KEY']
+  #   query do |builder|
+  #     {
+  #       q: CGI.escape(builder.query),
+  #       mkt: builder.market,
+  #       SafeSearch: builder.safesearch ? 'strict' : 'moderate',
+  #       offset: builder.offset,
+  #       count: builder.count
+  #       }
+  #   end
+  #   results 'webPages', 'value'
+  #   result do |i|
+  #     url i['url']
+  #     title i['name']
+  #     snippet i['snippet']
+  #   end
+  # end
+  # ```
+  # 
+  # _@see_ `SearchEngineBuilder`
+  def self.add: (Symbol engine_name) -> untyped
+
+  # sord omit - no YARD type given for "engine_name", using untyped
+  # _@return_ — An array. The first element is the human-friendly name of the engine. The second element is a proc that takes a query builder and returns an array of search results.
+  def self.[]: (untyped engine_name) -> ::Array[(Symbol | Proc)]
+
+  # sord duck - #to_sym looks like a duck type, replacing with untyped
+  # Searches for a specific query using the specified search engine.
+  # The query should be a QueryBuilder object.
+  # This is in order to store all the different parameters of the search in one place.
+  # That way, the query the search API recieves should be fit exactly to its specifications, to enable
+  # easy SafeSearch, choice of language/market, pagination, etc.
+  # 
+  # _@param_ `name` — The name of the search engine.
+  # 
+  # _@param_ `query` — The search query.
+  # 
+  # _@return_ — An array of search results (depends on the search engine).
+  def self.search_with: ((String | untyped) name, QueryBuilder query) -> ::Array[Result]
+
+  # sord omit - no YARD return type given, using untyped
+  def self.each: () -> untyped
+
+  # Returns the engines hash.
+  # 
+  # _@return_ — The engines hash
+  def self.engines: () -> ::Hash[Symbol, ::Array[(Symbol | Proc)]]
+
+  # sord omit - no YARD type given for "engine_name_list", using untyped
+  # sord omit - no YARD return type given, using untyped
+  # Loads the search engines specified in the configuration, relying on file naming conventions.
+  def self.load_engines: (untyped engine_name_list) -> untyped
+
+  # A hash of all the standard ISO 3166-1 Market Codes.
+  # Includes their human-readable names, mapped to their ISO 3166-1 alpha-2 codes.
+  # 
+  # _@return_ — (see SearchEngines::ISO3166)
+  # 
+  # _@see_ `SearchEngines::ISO3166`
+  def self.Languages: () -> ::Hash[String, String]
+
+  # A class that your search engine should inherit from.
+  # This is the base class for all search engines.
+  # By default, this class provides a robust DSL you can use to craft the different pieces
+  # of your search engine that must come together to satisfy the requirements of the default
+  # {#search} method. However, you may redefine the {#search} method to suit your needs, as long as
+  # it takes a {QueryBuilder} as an argument and returns an array of {Result}s.
+  # @see SearchEngines.add
+  # Please especially review the implementation of the {#search} method.
+  # @author Shreyan Jain
+  # @abstract
+  class SearchEngineBuilder
+    include HTTParty
+
+    # sord omit - no YARD type given for "string", using untyped
+    # sord omit - no YARD return type given, using untyped
+    # Defines an endpoint method that returns the given string.
+    # This is the endpoint of your search engine's API that HTTParty will call.
+    def self.endpoint: (untyped string) -> untyped
+
+    # Defines a method that takes a block as an argument and assigns it as the implementation of the `query` method.
+    # 
+    # Pass it a block that takes a {QueryBuilder} as an input, and returns a hash
+    # which will be encoded in the URI query string as GET params.
+    # 
+    # _@param_ `block` — The block to be assigned as the implementation of the `query` method.
+    # 
+    # _@return_ — (because it's a method definition)
+    # 
+    # ```ruby
+    # SearchEngines.add :Bing do
+    #   query do |builder|
+    #     {
+    #       q: CGI.escape(builder.query),
+    #       mkt: builder.market,
+    #       SafeSearch: builder.safesearch ? 'strict' : 'moderate',
+    #       offset: builder.offset,
+    #       count: builder.count
+    #     }
+    #   end
+    # end
+    # ```
+    def self.query: () -> Symbol
+
+    # sord omit - no YARD type given for "*result_mapping", using untyped
+    # sord omit - no YARD return type given, using untyped
+    def self.results: (*untyped result_mapping) -> untyped
+
+    # sord omit - no YARD return type given, using untyped
+    def self.result: () -> untyped
+
+    # Searches the configured search engine with the given query.
+    # When adding your own search engine, you may redefine this, as long as it works with the appropriate types.
+    # In order to map the results, use the `result_mapping` block.
+    # 
+    # _@param_ `query_builder` — The query builder you are searching with.
+    # 
+    # _@return_ — An array of search results (depends on the search engine).
+    def search: (QueryBuilder query_builder) -> ::Array[Result]
+
+    # sord warn - HTTParty::Response wasn't able to be resolved to a constant in this project
+    # Maps the results of a response.
+    # 
+    # _@param_ `response` — The HTTP response from calling the defined endpoint. Should contain a `results` key you want to map.
+    # 
+    # _@return_ — An array of mapped results if result_mapping is defined.
+    def map_results: (HTTParty::Response response) -> ::Array[Result]
+
+    # sord omit - no YARD type given for "item", using untyped
+    # sord omit - no YARD return type given, using untyped
+    def map_result: (untyped item) -> untyped
+  end
+
+  # @note You will probably never directly touch this class. It is primarily used by the {SearchEngineBuilder}
+  #   in order to provide syntax sugar for mapping result json (or whatever format you specified) to {Result}s.
+  class ResultMapper
+    # sord omit - no YARD type given for "item", using untyped
+    def initialize: (untyped item) -> void
+
+    # A method that dynamically creates setter methods for the given keys.
+    # These could use attr_writer, but this method ensures that the method will not need the = sign, since
+    # that just creates unnecessary pitfalls and footguns, and just looks uglier.
+    # 
+    # _@param_ `keys` — The keys to create setter methods for.
+    # 
+    # _@return_ — The keys that were created.
+    # 
+    # _@note_ — This method is used to create the syntactic sugar for `url`, `title`, and `snippet` methods to more easily map results.
+    # 
+    # _@note_ — `qattr` means quick attribute, fwiw
+    def self.qattr: (*::Array[Symbol] keys) -> ::Array[Symbol]
+
+    # Evaluates the given block in the context of the current instance.
+    # The block is expected to contain a mapping logic that assigns
+    # values to instance variables, usually by using the
+    # `url`, `title`, and `snippet` methods. After evaluating
+    # the block, the method creates a new `Result` object with
+    # the values assigned to `@url`, `@title`, and `@snippet`.
+    # 
+    # _@return_ — The newly created `Result` object.
+    # 
+    # _@note_ — This method is not meant to be called directly.
+    def map: () -> Result
+  end
+end
+
+class TenBlueLinks < Sinatra::Base
+end
+
+class Struct
+  # Converts the object to a JSON string.
+  # 
+  # _@return_ — the JSON representation of the object.
+  def to_json: () -> String
+end
+
+# A struct which represents a query to a search engine.
+# @author Shreyan Jain
+# @see SearchEngines::ISO3166
+# @!attribute query [rw]
+#   @return [String] the string being searched for.
+# @!attribute market [rw]
+#   @return [String] the market to search in, as defined by ISO 3166. See {SearchEngines::ISO3166}
+# @!attribute safesearch [rw]
+#   @return [Boolean] whether to use safe search or not.
+# @!attribute offset [rw]
+#   @return [Integer] the offset of the search results, you might think of this as the page number. Used for pagination.
+# @!attribute count [rw]
+#   @return [Integer] the number of results to return. Usually Ten Blue Ones ;)
+class QueryBuilder < Struct
+  # _@return_ — the string being searched for.
+  attr_accessor query: String
+
+  # _@return_ — the market to search in, as defined by ISO 3166. See {SearchEngines::ISO3166}
+  attr_accessor market: String
+
+  # _@return_ — whether to use safe search or not.
+  attr_accessor safesearch: bool
+
+  # _@return_ — the offset of the search results, you might think of this as the page number. Used for pagination.
+  attr_accessor offset: Integer
+
+  # _@return_ — the number of results to return. Usually Ten Blue Ones ;)
+  attr_accessor count: Integer
+end
+
+# A struct which represents a search result. Will be documented much better soon.
+# @author Shreyan Jain
+# @!attribute url [r]
+#   @return [String] the URL of the search result.
+# @!attribute title [r]
+#   @return [String] the title of the search result.
+# @!attribute snippet [r]
+#   @return [String] the snippet of the search result.
+class Result < Struct
+  # _@return_ — An HTML representation of the search result, to be rendered in the results page.
+  def to_html: () -> String
+
+  # _@return_ — the URL of the search result.
+  attr_reader url: String
+
+  # _@return_ — the title of the search result.
+  attr_reader title: String
+
+  # _@return_ — the snippet of the search result.
+  attr_reader snippet: String
+end
+
+module HTMLizer
+  # Generates a search form HTML code block, for initiating a second search, from the results page.
+  # 
+  # _@param_ `query` — the search query of the current page
+  # 
+  # _@param_ `engine_name` — the name of the search engine
+  # 
+  # _@return_ — the HTML code block of the search form
+  def self.search_form: (String query, String engine_name) -> String
+
+  # sord omit - no YARD type given for "where", using untyped
+  # sord omit - no YARD type given for "safesearch", using untyped
+  # sord omit - no YARD return type given, using untyped
+  def self.options_viewer: (untyped where, untyped safesearch) -> untyped
+end

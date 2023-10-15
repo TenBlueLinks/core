@@ -69,10 +69,10 @@
   <dl>
     <dt>Inherits:</dt>
     <dd>
-      <span class="inheritName">Object</span>
+      <span class="inheritName"><a href="https://docs.ruby-lang.org/en/2.3.0/Object.html">Object</a></span>
       
         <ul class="fullTree">
-          <li>Object</li>
+          <li><a href="https://docs.ruby-lang.org/en/2.3.0/Object.html">Object</a></li>
           
             <li class="next">SearchEngines::ResultMapper</li>
           
@@ -99,13 +99,63 @@
   
 </div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>You will probably never directly touch this class. It is primarily used by the <span class='object_link'><a href="SearchEngineBuilder.html" title="SearchEngines::SearchEngineBuilder (class)">SearchEngineBuilder</a></span> in order to provide syntax sugar for mapping result json (or whatever format you specified) to <span class='object_link'><a href="../Result.html" title="Result (class)">Result</a></span>s.</p>
+</div>
+  </div>
+
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
 
 
 
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
 
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#qattr-class_method" title="qattr (class method)">.<strong>qattr</strong>(*keys)  &#x21d2; Array&lt;Symbol&gt; </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A method that dynamically creates setter methods for the given keys.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
   
     <h2>
       Instance Method Summary
@@ -164,72 +214,6 @@
 </li>
 
       
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#snippet-instance_method" title="#snippet (instance method)">#<strong>snippet</strong>(value)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#title-instance_method" title="#title (instance method)">#<strong>title</strong>(value)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
-      <a href="#url-instance_method" title="#url (instance method)">#<strong>url</strong>(value)  &#x21d2; Object </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'></div></span>
-  
-</li>
-
-      
     </ul>
   
 
@@ -262,13 +246,13 @@
       <pre class="lines">
 
 
-189
-190
-191
-192</pre>
+194
+195
+196
+197</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 189</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 194</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='ivar'>@item</span> <span class='op'>=</span> <span class='id identifier rubyid_item'>item</span>
@@ -280,53 +264,111 @@
 </div>
   
 </div>
-<div id="method_missing_details" class="method_details_list">
-  <h2>Dynamic Method Handling</h2>
-  <p class="notice this">
-    This class handles dynamic methods through the <tt>method_missing</tt> method
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
     
-  </p>
+      <div class="method_details first">
+  <h3 class="signature first" id="qattr-class_method">
   
-    <div class="method_details first">
-  <h3 class="signature first" id="method_missing-instance_method">
-  
-    #<strong>method_missing</strong>(name, *args)  &#x21d2; <tt>Object</tt>  <span class="extras">(private)</span>
+    .<strong>qattr</strong>(*keys)  &#x21d2; <tt><a href="https://docs.ruby-lang.org/en/2.3.0/Array.html">Array</a>&lt;<a href="https://docs.ruby-lang.org/en/2.3.0/Symbol.html">Symbol</a>&gt;</tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>This method is used to create the syntactic sugar for ‘url`, `title`, and `snippet` methods to more easily map results.</p>
+</div>
+  </div>
+
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>‘qattr` means quick attribute, fwiw</p>
+</div>
+  </div>
+
+
+<p>A method that dynamically creates setter methods for the given keys. These could use attr_writer, but this method ensures that the method will not need the = sign, since that just creates unnecessary pitfalls and footguns, and just looks uglier.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>keys</span>
+      
+      
+        <span class='type'>(<tt><a href="https://docs.ruby-lang.org/en/2.3.0/Array.html">Array</a>&lt;<a href="https://docs.ruby-lang.org/en/2.3.0/Symbol.html">Symbol</a>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The keys to create setter methods for.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><a href="https://docs.ruby-lang.org/en/2.3.0/Array.html">Array</a>&lt;<a href="https://docs.ruby-lang.org/en/2.3.0/Symbol.html">Symbol</a>&gt;</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>The keys that were created.</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-219
-220
-221
-222
-223
-224
-225</pre>
+207
+208
+209
+210
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 219</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 207</span>
 
-<span class='id identifier rubyid_private'>private</span> <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
-  <span class='kw'>unless</span> <span class='ivar'>@item</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='rparen'>)</span>
-    <span class='kw'>super</span>
-  <span class='kw'>else</span>
-    <span class='ivar'>@item</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='id identifier rubyid_name'>name</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_qattr'>qattr</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_keys'>keys</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_keys'>keys</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_key'>key</span><span class='op'>|</span>
+    <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='id identifier rubyid_key'>key</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_any'>any</span><span class='op'>|</span> <span class='id identifier rubyid_instance_variable_set'>instance_variable_set</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>@</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='id identifier rubyid_any'>any</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
 </table>
 </div>
-  
-</div>
-
+    
+  </div>
 
   <div id="instance_method_details" class="method_details_list">
     <h2>Instance Method Details</h2>
@@ -344,6 +386,14 @@
 </h3><div class="docstring">
   <div class="discussion">
     
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>This method is not meant to be called directly.</p>
+</div>
+  </div>
+
+
 <p>Evaluates the given block in the context of the current instance. The block is expected to contain a mapping logic that assigns values to instance variables, usually by using the ‘url`, `title`, and `snippet` methods. After evaluating the block, the method creates a new `Result` object with the values assigned to `@url`, `@title`, and `@snippet`.</p>
 
 
@@ -376,107 +426,17 @@
       <pre class="lines">
 
 
-202
-203
-204
-205</pre>
+221
+222
+223
+224</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 202</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 221</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_map'>map</span>
-  <span class='id identifier rubyid_instance_eval'>instance_eval</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='ivar'>@mapping_block</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_instance_exec'>instance_exec</span><span class='lparen'>(</span><span class='ivar'>@item</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='ivar'>@mapping_block</span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Result.html" title="Result (class)">Result</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='ivar'>@url</span><span class='comma'>,</span> <span class='ivar'>@title</span><span class='comma'>,</span> <span class='ivar'>@snippet</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="snippet-instance_method">
-  
-    #<strong>snippet</strong>(value)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-215
-216
-217</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 215</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_snippet'>snippet</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
-  <span class='ivar'>@snippet</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="title-instance_method">
-  
-    #<strong>title</strong>(value)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-211
-212
-213</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 211</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_title'>title</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
-  <span class='ivar'>@title</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
-  <h3 class="signature " id="url-instance_method">
-  
-    #<strong>url</strong>(value)  &#x21d2; <tt>Object</tt> 
-  
-
-  
-
-  
-</h3><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-207
-208
-209</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 207</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_url'>url</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span>
-  <span class='ivar'>@url</span> <span class='op'>=</span> <span class='id identifier rubyid_value'>value</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -488,7 +448,7 @@
 </div>
 
       <div id="footer">
-  Generated on Mon Oct  9 20:23:49 2023 by
+  Generated on Sat Oct 14 19:51:17 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>

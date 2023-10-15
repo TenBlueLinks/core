@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# Config = {
+#   engines: {},
+# }
+
 # This module contains the DSL for the search engine configuration.
 #
 # @author Shreyan Jain
@@ -59,7 +63,7 @@ module SearchEngines
   # @param [Proc] block A block of code representing the search engine configuration.
   def self.add(engine_name, &block)
     engine = Class.new(SearchEngineBuilder)
-    engine.module_exec(&block)
+    engine.tap { _1.engine_name = engine_name }.module_exec(&block)
     @engines[engine_name.downcase.to_sym] = [engine_name, engine.new.method(:search).to_proc]
   end
 
@@ -103,8 +107,7 @@ module SearchEngines
   # {#search} method. However, you may redefine the {#search} method to suit your needs, as long as
   # it takes a {QueryBuilder} as an argument and returns an array of {Result}s.
   # @see SearchEngines.add
-  # The {#search} method looks like the following:
-  # {render:#search}
+  # Please especially review the implementation of the {#search} method.
   # @author Shreyan Jain
   # @abstract
   class SearchEngineBuilder
@@ -116,6 +119,8 @@ module SearchEngines
       def endpoint(string)
         define_method(:endpoint) { string }
       end
+
+      attr_accessor :engine_name
 
       # Defines a method that takes a block as an argument and assigns it as the implementation of the `query` method.
       #
@@ -134,17 +139,21 @@ module SearchEngines
       #     end
       #   end
       # @param block [Proc] The block to be assigned as the implementation of the `query` method.
-      # @return [Symbol] Nothing important, just the symbol :query for the `query` method.
+      # @return [:query] (because it's a method definition)
       def query(&block)
         define_method(:query, &block)
       end
 
       def results(*result_mapping)
-        define_method(:results) { result_mapping }
+        define_method(:results_key) { result_mapping }
       end
 
       def result(&block)
         define_method(:result_mapping) { block }
+      end
+
+      def config
+        OpenStruct.new(Config[:engines][engine_name.to_s].to_h)
       end
     end
 
@@ -158,17 +167,15 @@ module SearchEngines
       map_results(self.class.get(endpoint, query: query(query_builder)))
     end
 
-    private
-
     # Maps the results of a response.
     # @param [HTTParty::Response] response The HTTP response from calling the defined endpoint. Should contain a `results` key you want to map.
     # @return [Array<Result>] An array of mapped results if result_mapping is defined.
     def map_results(response)
-      result_data = deep_fetch(response, results)
+      result_data = response.dig(*results_key)
       if result_mapping
         result_data.map { |item| map_result(item) }
       else
-        result_data
+        raise NotImplementedError, "You must define a `result_mapping` block. Please read the docs for more info."
       end
     end
 
@@ -176,19 +183,31 @@ module SearchEngines
       if result_mapping
         ResultMapper.new(item, &result_mapping).map
       else
-        item
+        raise NotImplementedError, "You must define a `result_mapping` block. Please read the docs for more info."
       end
-    end
-
-    def deep_fetch(hsh, keys)
-      keys.reduce(hsh) { |h, key| h[key] }
     end
   end
 
+  # @note You will probably never directly touch this class. It is primarily used by the {SearchEngineBuilder}
+  #   in order to provide syntax sugar for mapping result json (or whatever format you specified) to {Result}s.
   class ResultMapper
     def initialize(item, &block)
       @item = item
       @mapping_block = block
+    end
+
+    # A method that dynamically creates setter methods for the given keys.
+    # These could use attr_writer, but this method ensures that the method will not need the = sign, since
+    # that just creates unnecessary pitfalls and footguns, and just looks uglier.
+    # @param keys [Array<Symbol>] The keys to create setter methods for.
+    # @return [Array<Symbol>] The keys that were created.
+    #
+    # @note This method is used to create the syntactic sugar for `url`, `title`, and `snippet` methods to more easily map results.
+    # @note `qattr` means quick attribute, fwiw
+    def self.qattr(*keys)
+      keys.map do |key|
+        define_method(key) { |any| instance_variable_set("@#{key}", any) }
+      end
     end
 
     # Evaluates the given block in the context of the current instance.
@@ -197,34 +216,13 @@ module SearchEngines
     # `url`, `title`, and `snippet` methods. After evaluating
     # the block, the method creates a new `Result` object with
     # the values assigned to `@url`, `@title`, and `@snippet`.
-    #
+    # @note This method is not meant to be called directly.
     # @return [Result] The newly created `Result` object.
     def map
-      instance_eval(&@mapping_block)
+      instance_exec(@item, &@mapping_block)
       Result.new(@url, @title, @snippet)
     end
 
-    def url(value)
-      @url = value
-    end
-
-    def title(value)
-      @title = value
-    end
-
-    def snippet(value)
-      @snippet = value
-    end
-
-    private def method_missing(name, *args)
-      unless @item.respond_to?(name)
-        super
-      else
-        @item.send(name, *args)
-      end
-    end
-    private def respond_to_missing?(name, include_private = false)
-      @item.respond_to?(name) || super
-    end
+    qattr :url, :title, :snippet
   end
 end

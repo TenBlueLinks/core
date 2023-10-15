@@ -2,8 +2,10 @@
   require_relative f
 end
 
-require "drb/drb"
+if $0 == __FILE__
+  require "drb/drb"
 
-DRb.start_service "druby://localhost:8787", SearchEngines
+  DRb.start_service "druby://localhost:8787", SearchEngines
 
-DRb.thread.join
+  DRb.thread.join
+end

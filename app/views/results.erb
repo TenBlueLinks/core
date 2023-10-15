@@ -1,7 +1,0 @@
-<%= "<br/> " * 2 %>
-<h3>Results for "<%= @query%>"</h3>
-<%= HTMLizer.search_form(@query, @engine) %>
-<%= "<br/> " * 2 %>
-<%= @results.map(&:to_html).join("\n<br/>\n") %>
-<br/>
-<%= @pages %>

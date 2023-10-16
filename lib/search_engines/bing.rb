@@ -1,4 +1,5 @@
 SearchEngines.add :Bing do
+  config :api_key
   base_uri "https://api.bing.microsoft.com/"
   endpoint "/v7.0/search"
   format :json
@@ -12,10 +13,9 @@ SearchEngines.add :Bing do
       count: builder.count,
     }
   end
-  results "webPages", "value"
-  result do |i|
-    url i["url"]
-    title i["name"]
-    snippet i["snippet"]
+  results "webPages", "value" do |r|
+    url r["url"]
+    title r["name"]
+    snippet r["snippet"]
   end
 end

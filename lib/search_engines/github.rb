@@ -12,10 +12,9 @@ SearchEngines.add :GitHub do
       page: builder.offset,
     }
   end
-  results "items"
-  result do |i|
-    url i["html_url"]
-    title i["full_name"]
-    snippet i["description"]
+  results "items" do |r|
+    url r["html_url"]
+    title r["full_name"]
+    snippet r["description"]
   end
 end

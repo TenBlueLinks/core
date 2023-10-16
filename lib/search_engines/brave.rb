@@ -1,4 +1,5 @@
 SearchEngines.add :Brave do
+  config :api_key
   base_uri "https://api.search.brave.com/"
   endpoint "/res/v1/web/search"
   format :json
@@ -12,10 +13,9 @@ SearchEngines.add :Brave do
       count: builder.count,
     }
   end
-  results "web", "results"
-  result do |i|
-    url i["url"]
-    title i["title"]
-    snippet i["description"]
+  results "web", "results" do |r|
+    url r["url"]
+    title r["title"]
+    snippet r["description"]
   end
 end

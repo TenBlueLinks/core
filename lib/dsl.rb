@@ -1,9 +1,5 @@
 # frozen_string_literal: true
 
-# Config = {
-#   engines: {},
-# }
-
 # This module contains the DSL for the search engine configuration.
 #
 # @author Shreyan Jain
@@ -15,10 +11,11 @@ module SearchEngines
   # Adds a search engine to the list of available engines.
   # @example Adding the Brave Search Engine's API
   #   SearchEngines.add :Brave do
+  #     config :api_key
   #     base_uri 'https://api.search.brave.com/'
   #     endpoint '/res/v1/web/search'
   #     format :json
-  #     headers "X-Subscription-Token": ENV['BRAVE_TOKEN']
+  #     headers "X-Subscription-Token": config.api_key
   #     query do |builder|
   #       {
   #         q: CGI.escape(builder.query),
@@ -28,8 +25,7 @@ module SearchEngines
   #         count: builder.count
   #       }
   #     end
-  #     results 'web', 'results'
-  #     result do |i|
+  #     results 'web', 'results' do |i|
   #       url i['url']
   #       title i['title']
   #       snippet i['description']
@@ -37,10 +33,11 @@ module SearchEngines
   #   end
   # @example Adding the Bing Search Engine's API
   #   SearchEngines.add :Bing do
+  #     config :api_key
   #     base_uri 'https://api.bing.microsoft.com/'
   #     endpoint '/v7.0/search'
   #     format :json
-  #     headers "Ocp-Apim-Subscription-Key": ENV['BING_API_KEY']
+  #     headers "Ocp-Apim-Subscription-Key": config.api_key
   #     query do |builder|
   #       {
   #         q: CGI.escape(builder.query),
@@ -50,8 +47,7 @@ module SearchEngines
   #         count: builder.count
   #         }
   #     end
-  #     results 'webPages', 'value'
-  #     result do |i|
+  #     results 'webPages', 'value' do |i|
   #       url i['url']
   #       title i['name']
   #       snippet i['snippet']
@@ -144,16 +140,44 @@ module SearchEngines
         define_method(:query, &block)
       end
 
-      def results(*result_mapping)
-        define_method(:results_key) { result_mapping }
+      # Specify the key of the json/xml/whatever response in which the array of results will be located.
+      #
+      # @see ResultMapper
+      # This allows you to parse the json/xml/whatever results into a {Result} object.
+      # @param results_key [Array] The name of the key in the response, which can
+      #   be nested several levels deep by passing multiple arguments, in the order of nesting.
+      # @param result_mapping [Proc] A block that will evaluate each item in the array and returns a {Result}. Evaluated
+      #   in the context of a {ResultMapper}.
+      def results(*results_key, &result_mapping)
+        define_method(:results_key) { results_key }
+        define_method(:result_mapping) { result_mapping }
       end
 
-      def result(&block)
-        define_method(:result_mapping) { block }
-      end
-
-      def config
-        OpenStruct.new(Config[:engines][engine_name.to_s].to_h)
+      # Makes your search engine have explicit configuration options. This way, you do not have to rely
+      # on environment variables, and instead can rely on conventions in the `conf.lua` file.
+      # @param args [Array<Symbol>] The names of the configuration options.
+      # You specify the different configuration options in the first call, and then you can
+      # access them in subsequent calls, like this:
+      #
+      #   -- conf.lua
+      #   engines = {
+      #     Bing = {
+      #       api_key = "some_ugly_api_key"
+      #     }
+      #   }
+      #
+      # @example
+      #   SearchEngines.add :Bing do
+      #     config :api_key # Makes the `api_key` option available
+      #     headers "Ocp-Apim-Subscription-Key": config.api_key # Accesses the `api_key` option from `conf.lua`
+      #    end
+      # @return [Struct, OpenStruct]
+      def config(*args)
+        if args.length > 0
+          @config_struct = Struct.new(*args)
+        else
+          (@config_struct || OpenStruct).new **(Config[:engines][engine_name.to_s].to_h)
+        end
       end
     end
 
@@ -179,6 +203,9 @@ module SearchEngines
       end
     end
 
+    # Maps a single result.
+    # @param [Hash] item The item to map.
+    # @return [Result] The mapped result.
     def map_result(item)
       if result_mapping
         ResultMapper.new(item, &result_mapping).map

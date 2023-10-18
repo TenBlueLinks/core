@@ -7,7 +7,7 @@ If you want to add your own search engine to TenBlueLinks, this guide will walk 
 Before you begin, make sure you have the following prerequisites:
 
 - **Ruby**: TenBlueLinks is a Ruby-based project, so ensure you have Ruby installed on your system.
-
+- **Lua**: Preferably 5.1, and make sure you have `liblua-dev` or whatever your system calls it. 
 - **TenBlueLinks Core**: Obviously.
 
 
@@ -25,12 +25,13 @@ This directory contains the SearchEngines module where you can define your searc
 3. **Define Your Search Engine Configuration**:
 
 Create the `bing.rb` file, where you can define your search engine's configuration using the `SearchEngines.add` method. The following is an example of adding the Bing search engine:
-
+  ```ruby
   SearchEngines.add :Bing do
+    config :api_key
     base_uri 'https://api.bing.microsoft.com/'
     endpoint '/v7.0/search'
     format :json
-    headers "Ocp-Apim-Subscription-Key": ENV['BING_API_KEY']
+    headers "Ocp-Apim-Subscription-Key": config.api_key
     query do |builder|
       {
         q: CGI.escape(builder.query),
@@ -47,12 +48,12 @@ Create the `bing.rb` file, where you can define your search engine's configurati
       snippet i['snippet']
     end
   end
-
+  ```
 Here's a breakdown of the key configuration options:
 
 
 - `base_uri`: The base URL for the search engine's API.
-
+- `config`: The options available to edit in `conf.lua`, which you then can access. 
 - `endpoint`: The endpoint path for the search.
 - `format`: The format in which results are expected (e.g., JSON).
 - `headers`: HTTP headers to be included in requests.
@@ -66,7 +67,15 @@ Customize the configuration according to your search engine's API specifications
 
 4. **Add API Key**:
 
-Make sure you have the necessary API keys or authentication credentials. In the example above, the Bing API key is stored in the `ENV['BING_API_KEY']` variable. Ensure you set the API key in your environment variables.
+Make sure you have the necessary API keys or authentication credentials. In the example above, the Bing API key is stored in the `api_key` variable in `conf.lua`. Ensure you set the API key in your `conf.lua` as follows:
+
+   ```lua
+   engines = {
+        Bing = {
+          api_key = "your_api_key"
+        }
+   }
+```
 
 5. **Testing Your Configuration**:
 

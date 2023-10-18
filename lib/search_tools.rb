@@ -7,7 +7,6 @@ require "json"
 require "markaby/kernel_method"
 
 # A struct which represents a query to a search engine.
-# @author Shreyan Jain
 # @see SearchEngines::ISO3166
 # @!attribute query [rw]
 #   @return [String] the string being searched for.
@@ -22,7 +21,6 @@ require "markaby/kernel_method"
 QueryBuilder = Struct.new(:query, :market, :safesearch, :offset, :count)
 
 # A struct which represents a search result. Will be documented much better soon.
-# @author Shreyan Jain
 # @!attribute url [r]
 #   @return [String] the URL of the search result.
 # @!attribute title [r]

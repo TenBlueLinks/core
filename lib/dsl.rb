@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 # This module contains the DSL for the search engine configuration.
-#
-# @author Shreyan Jain
 # It also serves as the front object for DRb connectors. It's a big module because it has a lot of responsibilities.
 module SearchEngines
   # A hash to store search engine configurations
@@ -54,12 +52,19 @@ module SearchEngines
   #     end
   #   end
   # @see SearchEngineBuilder
+  # @raise [ArgumentError] If the engine already exists or does not exist in the configuration
   #
   # @param [Symbol] engine_name The name of the engine.
   # @param [Proc] block A block of code representing the search engine configuration.
   def self.add(engine_name, &block)
-    engine = Class.new(SearchEngineBuilder)
-    engine.tap { _1.engine_name = engine_name }.module_exec(&block)
+    raise ArgumentError, "Invalid engine name: #{engine_name}"
+    if @engines.keys.include? engine_name.downcase.to_sym
+      raise ArgumentError, "Engine already exists: #{engine_name}"
+    elsif !EnginesList.include? engine_name
+      raise ArgumentError, "Engine does not exist in config: #{engine_name}"
+    end
+    engine = Class.new SearchEngineBuilder
+    engine.tap { _1.engine_name = engine_name }.module_exec &block
     @engines[engine_name.downcase.to_sym] = [engine_name, engine.new.method(:search).to_proc]
   end
 
@@ -81,6 +86,8 @@ module SearchEngines
     engines[name.to_sym][1].call(query)
   end
 
+  # Iterates over all engines.
+  # @deprecated Just use the actual hash (there's a getter for @engines).
   def self.each(&block)
     @engines.each(&block)
   end
@@ -104,7 +111,6 @@ module SearchEngines
   # it takes a {QueryBuilder} as an argument and returns an array of {Result}s.
   # @see SearchEngines.add
   # Please especially review the implementation of the {#search} method.
-  # @author Shreyan Jain
   # @abstract
   class SearchEngineBuilder
     include HTTParty

@@ -94,31 +94,31 @@ This directory contains the SearchEngines module where you can define your searc
   <li><strong>Define Your Search Engine Configuration</strong>:</li>
 </ol>
 
-<p>Create the <code>bing.rb</code> file, where you can define your search engine’s configuration using the <code>SearchEngines.add</code> method. The following is an example of adding the Bing search engine:</p>
-
-<p>SearchEngines.add :Bing do
-    base_uri ‘https://api.bing.microsoft.com/’
-    endpoint ‘/v7.0/search’
+<p>Create the <code>bing.rb</code> file, where you can define your search engine’s configuration using the <code>SearchEngines.add</code> method. The following is an example of adding the Bing search engine:
+  <code>ruby
+  SearchEngines.add :Bing do
+    base_uri 'https://api.bing.microsoft.com/'
+    endpoint '/v7.0/search'
     format :json
-    headers “Ocp-Apim-Subscription-Key”: ENV[‘BING_API_KEY’]
+    headers "Ocp-Apim-Subscription-Key": ENV['BING_API_KEY']
     query do |builder|
       {
         q: CGI.escape(builder.query),
         mkt: builder.market,
-        SafeSearch: builder.safesearch ? ‘strict’ : ‘moderate’,
+        SafeSearch: builder.safesearch ? 'strict' : 'moderate',
         offset: builder.offset,
         count: builder.count
       }
     end
-    results ‘webPages’, ‘value’
+    results 'webPages', 'value'
     result do |i|
-      url i[‘url’]
-      title i[‘name’]
-      snippet i[‘snippet’]
+      url i['url']
+      title i['name']
+      snippet i['snippet']
     end
-  end</p>
-
-<p>Here’s a breakdown of the key configuration options:</p>
+  end
+ </code>
+Here’s a breakdown of the key configuration options:</p>
 
 <ul>
   <li>
@@ -162,7 +162,7 @@ SearchEngines.search_with(:Bing, query) #=&gt; [Result(url, title, snippet)]
 </div></div>
 
       <div id="footer">
-  Generated on Sun Oct 15 18:01:32 2023 by
+  Generated on Mon Oct 16 20:13:54 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>

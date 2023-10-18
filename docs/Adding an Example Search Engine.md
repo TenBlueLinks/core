@@ -25,7 +25,7 @@ This directory contains the SearchEngines module where you can define your searc
 3. **Define Your Search Engine Configuration**:
 
 Create the `bing.rb` file, where you can define your search engine's configuration using the `SearchEngines.add` method. The following is an example of adding the Bing search engine:
-
+  ```ruby
   SearchEngines.add :Bing do
     base_uri 'https://api.bing.microsoft.com/'
     endpoint '/v7.0/search'
@@ -47,7 +47,7 @@ Create the `bing.rb` file, where you can define your search engine's configurati
       snippet i['snippet']
     end
   end
-
+  ```
 Here's a breakdown of the key configuration options:
 
 

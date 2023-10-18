@@ -7,6 +7,7 @@ require "rufus-lua"
 conf = Rufus::Lua::State.new
 File.read(File.expand_path("../../conf.lua", __FILE__)).then { conf.eval _1 }
 
+# The configuration from the conf.lua file, which will be loaded and registered.
 Config = {
   engines: conf["engines"].to_h,
 }
@@ -18,5 +19,6 @@ def SearchEngines.load_engines(engine_name_list)
   end
 end
 
-engines = %w[Bing Brave GitHub YaCy]
-SearchEngines.load_engines(engines)
+# The list of search engines enabled in your config file, which will be loaded and registered.
+SearchEngines::EnginesList = conf["engines"].to_h.keys
+SearchEngines.load_engines(SearchEngines::EnginesList)

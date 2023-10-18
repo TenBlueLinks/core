@@ -125,22 +125,6 @@
       <li><span class='object_link'><a href="../SearchEngines.html#add-class_method" title="SearchEngines.add (method)">add</a></span></li>
     
   </ul>
-<p class="tag_title">Author:</p>
-<ul class="author">
-  
-    <li>
-      
-      
-      
-      
-        
-        <div class='inline'>
-<p>Shreyan Jain</p>
-</div>
-      
-    </li>
-  
-</ul>
 
 </div>
 
@@ -402,12 +386,12 @@
       <pre class="lines">
 
 
-119
-120
-121</pre>
+125
+126
+127</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 119</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 125</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_engine_name'>engine_name</span>
   <span class='ivar'>@engine_name</span>
@@ -502,16 +486,16 @@ engines = {
       <pre class="lines">
 
 
-175
-176
-177
-178
-179
-180
-181</pre>
+181
+182
+183
+184
+185
+186
+187</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 175</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 181</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_config'>config</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;</span> <span class='int'>0</span>
@@ -551,12 +535,12 @@ engines = {
       <pre class="lines">
 
 
-115
-116
-117</pre>
+121
+122
+123</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 115</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 121</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_endpoint'>endpoint</span><span class='lparen'>(</span><span class='id identifier rubyid_string'>string</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:endpoint</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_string'>string</span> <span class='rbrace'>}</span>
@@ -650,12 +634,12 @@ engines = {
       <pre class="lines">
 
 
-139
-140
-141</pre>
+145
+146
+147</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 139</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 145</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:query</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -736,13 +720,13 @@ engines = {
       <pre class="lines">
 
 
-151
-152
-153
-154</pre>
+157
+158
+159
+160</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 157</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_results'>results</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_results_key'>results_key</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_result_mapping'>result_mapping</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_define_method'>define_method</span><span class='lparen'>(</span><span class='symbol'>:results_key</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_results_key'>results_key</span> <span class='rbrace'>}</span>
@@ -823,16 +807,16 @@ engines = {
       <pre class="lines">
 
 
-209
-210
-211
-212
-213
-214
-215</pre>
+215
+216
+217
+218
+219
+220
+221</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 209</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 215</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_map_result'>map_result</span><span class='lparen'>(</span><span class='id identifier rubyid_item'>item</span><span class='rparen'>)</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_result_mapping'>result_mapping</span>
@@ -910,17 +894,17 @@ engines = {
       <pre class="lines">
 
 
-197
-198
-199
-200
-201
-202
 203
-204</pre>
+204
+205
+206
+207
+208
+209
+210</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 203</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_map_results'>map_results</span><span class='lparen'>(</span><span class='id identifier rubyid_response'>response</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_result_data'>result_data</span> <span class='op'>=</span> <span class='id identifier rubyid_response'>response</span><span class='period'>.</span><span class='id identifier rubyid_dig'>dig</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_results_key'>results_key</span><span class='rparen'>)</span>
@@ -999,12 +983,12 @@ engines = {
       <pre class="lines">
 
 
-190
-191
-192</pre>
+196
+197
+198</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 190</span>
+      <pre class="code"><span class="info file"># File 'lib/dsl.rb', line 196</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search'>search</span><span class='lparen'>(</span><span class='id identifier rubyid_query_builder'>query_builder</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_map_results'>map_results</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='lparen'>(</span><span class='id identifier rubyid_endpoint'>endpoint</span><span class='comma'>,</span> <span class='label'>query:</span> <span class='id identifier rubyid_query'>query</span><span class='lparen'>(</span><span class='id identifier rubyid_query_builder'>query_builder</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
@@ -1019,7 +1003,7 @@ engines = {
 </div>
 
       <div id="footer">
-  Generated on Sun Oct 15 18:01:33 2023 by
+  Generated on Mon Oct 16 20:13:54 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
